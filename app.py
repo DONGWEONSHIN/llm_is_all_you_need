@@ -27,12 +27,19 @@ llm = ChatGoogleGenerativeAI(model="gemini-pro")
 # LangChain 설정 - PaLM2
 # embeddings = VertexAIEmbeddings()
 
+# LangChain - PDF
+from langchain.document_loaders import PyPDFLoader
+from langchain.vectorstores.chroma import Chroma
+from langchain.vectorstores.faiss import FAISS
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
     return render_template('chat.html')
+    # return render_template('new_modefied_chat.html')
 
 
 @app.route("/get", methods=["GET", "POST"])
@@ -68,6 +75,58 @@ def get_Chat_response(text):
 
         # pretty print last ouput tokens from bot
         return tokenizer.decode(chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)
+
+
+@app.route("/getPdf", methods=["GET", "POST"])
+def getPdf():
+    
+    # 샘플 PDF
+    samlePDF = "langchain.pdf"
+    gemini_embedding_model = "models/embedding-001"
+    
+    loader = PyPDFLoader(samlePDF)
+    pages = loader.load_and_split()
+    
+    print("##### 1 : pages #######", pages[0])
+    
+    embeddings = GoogleGenerativeAIEmbeddings(model=gemini_embedding_model)
+    faiss_index = FAISS.from_documents(pages, embeddings)
+    
+    query = "에이전트는 무엇입니까"
+    docs = faiss_index.similarity_search(query)
+    print("##### 2 : query #######", docs[0].page_content)
+    
+    embedding_vector = GoogleGenerativeAIEmbeddings(model=gemini_embedding_model).embed_query(query)
+    docs = faiss_index.similarity_search_by_vector(embedding_vector)
+    print("##### 3 : embedding_vector #######", docs[0].page_content)
+    
+    return "SUCCESS.PDF"
+    
+
+@app.route("/chatWithPdf", methods=["GET", "POST"])
+def chatWithPdf():
+    
+    # 샘플 PDF
+    samlePDF = "langchain.pdf"
+    gemini_embedding_model = "models/embedding-001"
+    
+    loader = PyPDFLoader(samlePDF)
+    pages = loader.load_and_split()
+    
+    print("##### 1 : pages #######", pages[0])
+    
+    embeddings = GoogleGenerativeAIEmbeddings(model=gemini_embedding_model)
+    faiss_index = FAISS.from_documents(pages, embeddings)
+    
+    query = request.form["msg"]
+    
+    embedding_vector = GoogleGenerativeAIEmbeddings(model=gemini_embedding_model).embed_query(query)
+    docs = faiss_index.similarity_search_by_vector(embedding_vector)
+    print("##### 3 : embedding_vector #######", docs[0].page_content)
+    
+    return markdown.markdown(docs[0].page_content, extensions=['extra'])
+
+
 
 
 if __name__ == '__main__':

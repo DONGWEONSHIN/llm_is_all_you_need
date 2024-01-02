@@ -7,5 +7,7 @@ langchain
 google-generativeai
 langchain-google-genai
 chardet
+pypdf
+faiss-cpu
 
 markdown
