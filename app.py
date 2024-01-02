@@ -82,6 +82,14 @@ def getPdf():
     
     # 샘플 PDF
     samlePDF = "langchain.pdf"
+    pdf_path = "./dn_pdf"
+    
+    file = request.files['file']
+    filename = str(file.filename)
+    
+    os.makedirs(pdf_path, exist_ok=True)
+    file.save(os.path.join(pdf_path, filename))    
+    
     gemini_embedding_model = "models/embedding-001"
     
     loader = PyPDFLoader(samlePDF)
@@ -109,22 +117,25 @@ def chatWithPdf():
     # 샘플 PDF
     samlePDF = "langchain.pdf"
     gemini_embedding_model = "models/embedding-001"
+    gemini_task_type = "retrieval_document"
     
     loader = PyPDFLoader(samlePDF)
     pages = loader.load_and_split()
     
-    print("##### 1 : pages #######", pages[0])
+    print("##### 1 : page loaded #######", pages[0])
     
     embeddings = GoogleGenerativeAIEmbeddings(model=gemini_embedding_model)
-    faiss_index = FAISS.from_documents(pages, embeddings)
+    db = FAISS.from_documents(pages, embeddings)
     
     query = request.form["msg"]
     
-    embedding_vector = GoogleGenerativeAIEmbeddings(model=gemini_embedding_model).embed_query(query)
-    docs = faiss_index.similarity_search_by_vector(embedding_vector)
-    print("##### 3 : embedding_vector #######", docs[0].page_content)
+    doc_embeddings = GoogleGenerativeAIEmbeddings(model=gemini_embedding_model, task_type=gemini_task_type)
+    # doc_vecs = [doc_embeddings,embed_query(q) for q in [query, query_2, answer_1]]
+    # docs = db.similarity_search_by_vector(doc_embeddings)
+    # print("##### 3 : doc_embeddings #######", doc_vecs)
     
-    return markdown.markdown(docs[0].page_content, extensions=['extra'])
+    # return markdown.markdown(docs[0].page_content, extensions=['extra'])
+    return "success"
 
 
 
