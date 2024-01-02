@@ -1,13 +1,13 @@
-flask
-transformers
-torch
+Flask==3.0.0
+transformers==4.36.2
+torch==2.1.2
 
-python-dotenv
-langchain
-google-generativeai
-langchain-google-genai
-chardet
-pypdf
-faiss-cpu
+python-dotenv==1.0.0
+langchain==0.0.353
+google-generativeai==0.3.2
+langchain-google-genai==0.0.5
+chardet==5.2.0
+pypdf==3.17.4
+faiss-cpu==1.7.4
 
-markdown
+Markdown==3.5.1
