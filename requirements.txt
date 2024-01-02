@@ -1,3 +1,9 @@
 flask
 transformers
 torch
+
+python-dotenv
+langchain
+google-generativeai
+langchain-google-genai
+chardet
