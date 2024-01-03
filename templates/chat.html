@@ -25,11 +25,14 @@
 									<p>Ask me anything!</p>
 								</div>
 								<!-- upload button 추가 부분-->
-								<form id="uploadForm" enctype="multipart/form-data">
-									<input type="file" id="fileupload" />
-									<button onclick="upload()">upload</button>
-									<p id="resultUploadPath"></p>
-								</form>
+								<div class="filebox">
+									<form id="uploadForm" enctype="multipart/form-data">
+										<label for="fileupload">File Select</label>
+										<input type="file" id="fileupload" class="pdf_fileselect_btn"></input>
+										<button onclick="upload()" class="pdf_upload_btn">Upload</button>
+										<p id="resultUploadPath"></p>
+									</form>
+								</div>
 							</div>
 						</div>
 						<div id="messageFormeight" class="card-body msg_card_body">

@@ -47,7 +47,7 @@ border-radius: 0 0 15px 15px !important;
 .type_msg{
 	background-color: rgba(0,0,0,0.3) !important;
 	border:0 !important;
-	color:white !important;
+	color:grey !important;
 	height: 60px !important;
 	overflow-y: auto;
 }
@@ -216,6 +216,72 @@ border-radius: 0 0 15px 15px !important;
 	cursor: pointer;
 	background-color: rgba(0,0,0,0.2);
 }
+
+
+/* Upload 버튼 css */
+.pdf_upload_btn{
+	border-radius: 0 10px 10px 0 !important;
+	background-color: rgba(0,0,0,0.3) !important;
+	border-style: none !important;
+	color: white !important;
+	cursor: pointer;
+	position: absolute;
+	/* margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: auto; */
+	/*margin:5px 5px 0 auto;*/
+	margin:0px 0px 0px 0px; /*위 오른쪽 아래 왼쪽*/
+	padding: .5em .75em;
+	font-size: 16px;
+}
+
+.pdf_fileselect_btn{
+	border-radius: 10px 0px 0px 10px !important;
+	color: white;
+	margin:5px 10px 0px 20px;
+}
+
+/*File Select 버튼 css */
+.filebox label {
+	display: inline-block;
+	border-radius: 10px 0px 0px 10px !important; /* padding 모서리 둥글게 */
+	margin:0px 0 0 245px; /*좌우 움직일때*/
+	padding: .6em .75em;
+	color: #fff;
+	font-size: 16px; /*inherit;*/
+	line-height: normal;
+	vertical-align: middle;
+	background-color: rgba(0,0,0,0.3);
+	cursor: pointer;
+	border-radius: .25em;
+	-webkit-transition: background-color 0.2s;
+	transition: background-color 0.2s;
+}
+  
+.filebox label:hover {
+	background-color: rgba(0,0,0,0.3);
+}
+  
+.filebox label:active {
+	background-color: rgba(0,0,0,0.3);
+}
+  
+.filebox input[type="file"] {
+	background-color: rgba(0,0,0,0.3) !important;
+	border-style: none !important;
+	color: white !important;
+	cursor: pointer;
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	/*border: 0;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;*/
+}
+
 @media(max-width: 576px){
 	.contacts_card{
 	margin-bottom: 15px !important;
