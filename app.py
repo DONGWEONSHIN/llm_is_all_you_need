@@ -88,11 +88,12 @@ def getPdf():
     filename = str(file.filename)
     
     os.makedirs(pdf_path, exist_ok=True)
-    file.save(os.path.join(pdf_path, filename))    
+    fileFullPath = os.path.join(pdf_path, filename)
+    file.save(fileFullPath)  
     
     gemini_embedding_model = "models/embedding-001"
     
-    loader = PyPDFLoader(samlePDF)
+    loader = PyPDFLoader(fileFullPath)
     pages = loader.load_and_split()
     
     print("##### 1 : pages #######", pages[0])
