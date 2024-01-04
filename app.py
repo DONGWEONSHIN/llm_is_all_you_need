@@ -33,6 +33,8 @@ from langchain.vectorstores.chroma import Chroma
 from langchain.vectorstores.faiss import FAISS
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
+# pdf 저장폴더
+PDF_DN_FOLDER = "./PDF_DN_FOLDER"
 
 app = Flask(__name__)
 
@@ -42,7 +44,7 @@ def index():
     # return render_template('new_modefied_chat.html')
 
 
-@app.route("/get", methods=["GET", "POST"])
+@app.route("/chat", methods=["GET", "POST"])
 def chat():
     msg = request.form["msg"]
     input = msg
@@ -59,7 +61,7 @@ def chat():
     return markdown.markdown(llm_result, extensions=['extra'])
     # return get_Chat_response(input)
 
-
+# microsoft/DialoGPT-medium
 def get_Chat_response(text):
 
     # Let's chat for 5 lines
@@ -77,31 +79,55 @@ def get_Chat_response(text):
         return tokenizer.decode(chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)
 
 
-@app.route("/getPdf", methods=["GET", "POST"])
-def getPdf():
+@app.route("/savePdf", methods=["POST"])
+def savePdf():
     
-    # 샘플 PDF
-    samlePDF = "langchain.pdf"
-    pdf_path = "./dn_pdf"
+    result = {
+        "RETURN_FLAG" : "SUCCESS" ,
+        "RETURN_INFO" : "THE FILE WAS SAVED SUCCESSFULLY."      
+    }
+    os.makedirs(PDF_DN_FOLDER, exist_ok=True)
     
     file = request.files['file']
-    filename = str(file.filename)
+    fullFilename = str(file.filename)
+    fname, fextension = os.path.splitext(fullFilename)
+    if fextension != '.pdf':
+        result = {
+            "RETURN_FLAG" : "FAIL" ,
+            "RETURN_INFO" : "IT IS NOT A PDF FILE.THE FILE WAS SAVED SUCCESSFULLY"         
+        }
+    else :
+        fileFullPath = os.path.join(PDF_DN_FOLDER, fullFilename)
+        file.save(fileFullPath)
     
-    os.makedirs(pdf_path, exist_ok=True)
-    fileFullPath = os.path.join(pdf_path, filename)
-    file.save(fileFullPath)  
+    return result
     
-    gemini_embedding_model = "models/embedding-001"
+
+@app.route("/chatWithPdf", methods=["GET", "POST"])
+def chatWithPdf():
+    
+    msg = request.form["msg"]
+    fullFilename = request.form["filename"]
+    
+    fileFullPath = os.path.join(PDF_DN_FOLDER, fullFilename)
+    
+    # TODO
+    # 파일이 있는지 확인하고,
+    # 파일이 없다면 프론트에 fail 리턴
     
     loader = PyPDFLoader(fileFullPath)
     pages = loader.load_and_split()
     
-    print("##### 1 : pages #######", pages[0])
+    print("##### 1 : pages loaded ##### \n\n", pages[0])
+    
+    # Gemini 임베딩
+    gemini_embedding_model = "models/embedding-001"
     
     embeddings = GoogleGenerativeAIEmbeddings(model=gemini_embedding_model)
     faiss_index = FAISS.from_documents(pages, embeddings)
+    faiss_index.as_retriever
     
-    query = "에이전트는 무엇입니까"
+    query = msg
     docs = faiss_index.similarity_search(query)
     print("##### 2 : query #######", docs[0].page_content)
     
@@ -109,11 +135,11 @@ def getPdf():
     docs = faiss_index.similarity_search_by_vector(embedding_vector)
     print("##### 3 : embedding_vector #######", docs[0].page_content)
     
-    return "SUCCESS.PDF"
     
-
-@app.route("/chatWithPdf", methods=["GET", "POST"])
-def chatWithPdf():
+    
+    
+    
+    
     
     # 샘플 PDF
     samlePDF = "langchain.pdf"
@@ -136,7 +162,17 @@ def chatWithPdf():
     # print("##### 3 : doc_embeddings #######", doc_vecs)
     
     # return markdown.markdown(docs[0].page_content, extensions=['extra'])
-    return "success"
+    
+    
+    
+    
+    # 샘플로 보내 드립니다. 
+    # 나중에 작업 되면 삭제될 내용입니다. 
+    input = msg
+    result = llm.invoke(input)
+    llm_result = result.content
+    
+    return markdown.markdown(llm_result, extensions=['extra'])
 
 
 
