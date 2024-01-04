@@ -44,10 +44,6 @@ def index():
     return render_template('chat.html')
     # return render_template('new_modefied_chat.html')
 
-@app.route("/js/chat.js", methods=["GET"])
-def getJs():
-    return render_template('chat.js')
-
 @app.route("/chat", methods=["GET", "POST"])
 def chat():
     msg = request.form["msg"]
