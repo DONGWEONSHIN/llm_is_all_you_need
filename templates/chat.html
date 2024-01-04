@@ -3,6 +3,7 @@
 	<head>
 		<title>Chatbot</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="{{ url_for('static',filename='chat.js') }}"></script>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}"/>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -29,10 +30,12 @@
 									<form id="uploadForm" enctype="multipart/form-data">
 										<label for="fileupload">File Select</label>
 										<input type="file" id="fileupload" class="pdf_fileselect_btn"></input>
-										<button onclick="upload()" class="pdf_upload_btn">Upload</button>
+										<!--<button onclick="upload()" class="pdf_upload_btn">Upload</button>-->
+										<button type="submit" class="pdf_upload_btn">Upload</button>
 										<p id="resultUploadPath"></p>
 									</form>
 								</div>
+								<!-- 추가 부분 끝-->
 							</div>
 						</div>
 						<div id="messageFormeight" class="card-body msg_card_body">
@@ -50,9 +53,10 @@
 			</div>
 		</div>
 		
-		<script>
+		<!--<script>
 			function upload() {
 			  	const fileupload = $("#fileupload")[0];
+				console.debug();
 			  	// 파일을 여러개 선택할 수 있으므로 files 라는 객체에 담긴다.
 			  	console.log("fileupload: ", fileupload.files)
 
@@ -64,10 +68,9 @@
 			  	const file = new FormData();
 			  	file.append("file", fileupload.files[0]);
 			  
-			  
 			  	$.ajax({
 			  	  type:"POST",
-			  	  url: "/getPdf",
+			  	  url: "/savePdf",
 			  	  processData: false,
 			  	  contentType: false,
 			  	  data: file,
@@ -100,7 +103,7 @@
 							msg: rawText,	
 						},
 						type: "POST",
-						url: "/get",
+						url: "/chat",
 					}).done(function(data) {                      // .done 서버로부터 응답이 성공적으로 도착하면 실행되는 함수
 						var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
 						$("#messageFormeight").append($.parseHTML(botHtml));    // #messageFormeight에 botHtml을 추가 
@@ -108,6 +111,6 @@
 					event.preventDefault();                       // form 태그는 기본적으로 페이지 새로고침을 하지만 이것을 방지
 				});
 			});
-		</script>
+		</script>-->
     </body>
 </html>
