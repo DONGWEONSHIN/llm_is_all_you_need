@@ -29,6 +29,7 @@ llm = ChatGoogleGenerativeAI(model="gemini-pro")
 
 # LangChain - PDF
 from langchain.document_loaders import PyPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores.chroma import Chroma
 from langchain.vectorstores.faiss import FAISS
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -43,6 +44,9 @@ def index():
     return render_template('chat.html')
     # return render_template('new_modefied_chat.html')
 
+@app.route("/js/chat.js", methods=["GET"])
+def getJs():
+    return render_template("chat.js")
 
 @app.route("/chat", methods=["GET", "POST"])
 def chat():
@@ -119,17 +123,24 @@ def chatWithPdf():
     # 파일이 있는지 확인하고,
     # 파일이 없다면 프론트에 fail 리턴
     
+    # 1. pdf 가져오기
     loader = PyPDFLoader(fileFullPath)
     pages = loader.load_and_split()
-    
     print("##### 1 : pages loaded ##### \n\n", pages[0])
     
-    # Gemini 임베딩
-    gemini_embedding_model = "models/embedding-001"
+    # 2. pdf split하기
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
+    docs = text_splitter.split_documents(pages)
     
+    # 3. Gemini 임베딩
+    gemini_embedding_model = "models/embedding-001"
     embeddings = GoogleGenerativeAIEmbeddings(model=gemini_embedding_model)
+    
+    # 4. vector store에서 인덱스 생성
     faiss_index = FAISS.from_documents(pages, embeddings)
-    faiss_index.as_retriever
+    
+    # 5. retriever 정의
+    faiss_index.as_retriever(search_type="similarity", search_kwargs={"k": k})
     
     query = msg
     docs = faiss_index.similarity_search(query)
