@@ -83,8 +83,8 @@ def get_Chat_response(text):
 def savePdf():
     
     result = {
-        "RETURN_FLAG" : "SUCCESS" ,
-        "RETURN_INFO" : "THE FILE WAS SAVED SUCCESSFULLY."      
+        "RETURN_FLAG" : "LOADED" ,
+        "RETURN_INFO" : ""      
     }
     os.makedirs(PDF_DN_FOLDER, exist_ok=True)
     
@@ -94,11 +94,15 @@ def savePdf():
     if fextension != '.pdf':
         result = {
             "RETURN_FLAG" : "FAIL" ,
-            "RETURN_INFO" : "IT IS NOT A PDF FILE.THE FILE WAS SAVED SUCCESSFULLY"         
+            "RETURN_INFO" : "IT IS NOT A PDF FILE."         
         }
     else :
         fileFullPath = os.path.join(PDF_DN_FOLDER, fullFilename)
         file.save(fileFullPath)
+        result = {
+            "RETURN_FLAG" : "SUCCESS" ,
+            "RETURN_INFO" : "THE FILE WAS SAVED SUCCESSFULLY."      
+        }
     
     return result
     
