@@ -46,7 +46,7 @@ def index():
 
 @app.route("/js/chat.js", methods=["GET"])
 def getJs():
-    return render_template("chat.js")
+    return render_template('chat.js')
 
 @app.route("/chat", methods=["GET", "POST"])
 def chat():
