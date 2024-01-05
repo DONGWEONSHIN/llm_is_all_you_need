@@ -32,6 +32,7 @@ from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores.chroma import Chroma
 from langchain.vectorstores.faiss import FAISS
+from langchain.vectorstores.docarray import DocArrayInMemorySearch
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain.chains import ConversationalRetrievalChain
 
@@ -127,12 +128,14 @@ def chatWithPdf():
     
     # 1. pdf 가져오기
     loader = PyPDFLoader(fileFullPath)
-    pages = loader.load_and_split()
-    print("##### 1 : pages loaded ##### \n\n", pages[0])
+    # pages = loader.load_and_split()
+    pages = loader.load()
+    print("\n\n ##### 1 : pages loaded ##### \n\n", pages[0])
     
     # 2. pdf split하기
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150)
     docs = text_splitter.split_documents(pages)
+    print("\n\n ##### 2 : text splitted ##### \n\n", docs[0])
     
     # 3. Gemini 임베딩
     gemini_embedding_model = "models/embedding-001"
@@ -141,10 +144,19 @@ def chatWithPdf():
     # embeddings = GoogleGenerativeAIEmbeddings(model=gemini_embedding_model, task_type=gemini_task_type)
     
     # 4. vector store에서 인덱스 생성
-    faiss_index = FAISS.from_documents(docs, embeddings)
+    # faiss_index = FAISS.from_documents(docs, embeddings)
+    db = DocArrayInMemorySearch.from_documents(docs, embeddings)
+    
+    # sim_search = faiss_index.similarity_search(msg)
+    # print("\n\n ##### 4-1 : similarity_search ##### \n\n", sim_search[0].page_content)
+    
+    # embedding_vector = GoogleGenerativeAIEmbeddings(model=gemini_embedding_model).embed_query(msg)
+    # vec_search = faiss_index.similarity_search_by_vector(embedding_vector)
+    # print("\n\n ##### 4-2 : similarity_search_by_vector ##### \n\n", vec_search[0].page_content)
     
     # 5. retriever 정의
-    retriever = faiss_index.as_retriever(search_type="similarity", search_kwargs={"k": k_value})
+    # retriever = faiss_index.as_retriever(search_type="similarity", search_kwargs={"k": k_value})
+    retriever = db.as_retriever(search_type="similarity", search_kwargs={"k": k_value})
     
     # 6. chain 설정
     qa = ConversationalRetrievalChain.from_llm(
@@ -160,12 +172,9 @@ def chatWithPdf():
     
     
     
-    # docs = faiss_index.similarity_search(query)
-    # print("##### 2 : query #######", docs[0].page_content)
     
-    # embedding_vector = GoogleGenerativeAIEmbeddings(model=gemini_embedding_model).embed_query(query)
-    # docs = faiss_index.similarity_search_by_vector(embedding_vector)
-    # print("##### 3 : embedding_vector #######", docs[0].page_content)
+    
+
     
     llm_result = result['answer']
     
