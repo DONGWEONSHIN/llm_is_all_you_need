@@ -13,8 +13,9 @@
 
 ## 실행 방법
 1. mv .env.local .env
-2. pip install -r requirements.tx
-3. flask run
+2. fill in GOOGLE_API_KEY
+3. pip install -r requirements.txt
+4. flask run
 
 
 
