@@ -1,72 +1,56 @@
-![Binaryhood](Logo/BinaryhoodLogo.png)
+## 목적
+- Gemini를 이용하여 PDF를 업로드 후, RAG 구현하여 PDF에 있는 내용을 질의
 
-# ChatBot
 
-## Installation & Setup
 
-[Install Python] https://www.dataquest.io/blog/installing-python-on-mac/
+## 구성원
+- DONGWEONSHIN
+- Jeon0866 JinHwan
+- wjseoduq
+- rnansfyd
 
-[Install pip] https://phoenixnap.com/kb/install-pip-mac
 
-If you have Python & pip installed then check their version in the terminal or command line tools
 
+## 실행 방법
+1. mv .env.local .env
+2. pip install -r requirements.tx
+3. flask run
+
+
+
+## Google AI Gemini 와 Langchain으로 RAG를 시도 - 1차 시도 (문제점 포함)
+1. 2023년 12월에 출시된 Gemini는 Google AI Gemini와 Vertext AI Gemini 버전 2가지가 있습니다.
+2. 각각의 버전은 코드가 동일하지 않고, 현재 (2024년 1월 기준) 샘플 코드가 많지 않습니다
+3. LangChain도 Gemini를 대응하기 위한 샘플 코드가 적고, 그나마 기본적인 코드만 존재 합니다.
+4. 1차 RAG 시도 시 버전은 아래와 같습니다.
 ```
-python3 --version
+langchain==0.0.353
+google-generativeai==0.3.2
+langchain-google-genai==0.0.5
 ```
-
+5. 1차 RAG 시도시에는 PDF 업로드 후, PDF 내용을 질의 하면 10번중 1번만 응답을 합니다.
+6. 1차 파일을 기록을 남기고자 아래의 파일을 접두어 'ver1_'를 추가하여 변경합니다
 ```
-pip --version
-```
-
-## Installing Flask
-
-In your terminal run the requirements.txt file using this pip
-
-```
-pip install -r requirements.txt
-```
-
-
-## Running ChatBot Application in Terminal
-
-```
-cd into your directory
-```
-
-```
-python app.py
+app.py
+requirements.txt
 ```
 
 
-
-## What you will create
-
-In this tutorial, I will guide you through the process of building a chatbot that can carry out conversations with users using natural language processing.
-
-To start, we will be using Microsoft DialoGPT, a pre-trained language model that can generate human-like responses to given prompts. We will be integrating DialoGPT with Flask, a popular Python web framework, to create a web application that can communicate with users via a chat interface.
-
-For the frontend of our application, we will be using HTML, CSS, and JavaScript to create a visually appealing and interactive chat interface. Additionally, we will be using jQuery to handle the HTTP requests that are made to the backend server.
-
-Throughout the tutorial, I will provide step-by-step instructions on how to set up your development environment, install the necessary dependencies, and create the required files and code for the application. I will also explain how to train and fine-tune the DialoGPT model to improve the accuracy of its responses.
-
-By the end of this tutorial, you will have a fully functional chatbot that can engage in conversations with users, and you will have gained valuable experience in using Microsoft DialoGPT, Flask, and web development technologies such as HTML, CSS, and JavaScript.
-
-# ChatBot Link
-The Chatbot is constructed using the Microsoft/DialoGPT-medium model.
-
+## 2차 시도 (성공)
+1. 2차 시도 버전은 아래와 같습니다.
 ```
-https://huggingface.co/microsoft/DialoGPT-medium
+langchain==0.1.0
+google-generativeai==0.3.2
+langchain-google-genai==0.0.6
 ```
+2. 벡터 스토어를 FAISS로 변경 하고, retriever와 chain을 단순화 하여 수정하였습니다.
+3. Google AI Gemini 코드와 Vertext AI Gemini를 인지하고 Google AI Gemini로만 진행 하였습니다.
+4. RAG 구성을 완료 하고 PDF 업로드 후 질의 하면, PDF의 내용에 대해 답을 합니다.
 
-# User-Html
 
-```
-var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + user_input + '<span class="msg_time_send">'+ time + 
-    '</span></div><div class="img_cont_msg"><img src="https://i.ibb.co/d5b84Xw/Untitled-design.png" class="rounded-circle user_img_msg"></div></div>';
-```
 
-# Bot-HTML
 
-```
-var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + bot_response + '<span class="msg_time">' + time + '</span></div></div>';
-```
+
+
+
+

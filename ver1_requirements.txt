@@ -1,0 +1,33 @@
+Flask==3.0.0
+transformers==4.36.2
+torch==2.1.2
+
+python-dotenv==1.0.0
+langchain==0.0.353
+google-generativeai==0.3.2
+langchain-google-genai==0.0.5
+chardet==5.2.0
+pypdf==3.17.4
+faiss-cpu==1.7.4
+
+Markdown==3.5.1
+
+
+# 추가 설치
+# pip install "langchain[docarray]"
+
+# 기존 버전 확인 방법
+# (llm_venv) ➜  llm_is_all_you_need git:(main) ✗ pip list | grep pydantic
+# pydantic                     2.5.3
+# pydantic_core                2.14.6
+
+# 기존 버전을 삭제 후 다운버전으로 설치
+# pip uninstall pydantic
+# pip uninstall pydantic-core
+# pip install pydantic==1.10.9
+# pip install pydantic-core==2.1.2
+
+# 아래의 버전이 동작 가능한 버전 입니다.
+# (llm_venv) ➜  llm_is_all_you_need git:(main) ✗ pip list | grep pydantic
+# pydantic                     1.10.9
+# pydantic_core                2.1.2
