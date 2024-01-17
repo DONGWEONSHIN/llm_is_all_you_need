@@ -49,9 +49,14 @@
 
 - https://cloud.google.com/sdk/docs/install?hl=ko#linux
 
+````
+gcloud init
+````
+
 2. auth 확인
 
 - https://cloud.google.com/python/docs/setup#linux
+
 ````
 gcloud auth application-default login
 ````
