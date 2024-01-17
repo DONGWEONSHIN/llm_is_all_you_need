@@ -44,6 +44,19 @@
 
 
 
+### Vertex AI - gcloud CLI 확인 방법
+1. gcloud CLI 설치
+
+- https://cloud.google.com/sdk/docs/install?hl=ko#linux
+
+2. auth 확인
+
+- https://cloud.google.com/python/docs/setup#linux
+````
+gcloud auth application-default login
+````
+
+
 ## 폴더 구조
 ```
 ├── PDF_DN_FOLDER
