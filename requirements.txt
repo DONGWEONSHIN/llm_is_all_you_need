@@ -10,5 +10,5 @@ pypdf==3.17.4
 faiss-cpu==1.7.4
 
 # Vertex AI Palm2
-google-cloud-aiplatform==1.39.0
+google-cloud-aiplatform==1.38.1
 langchain-google-vertexai==0.0.1
