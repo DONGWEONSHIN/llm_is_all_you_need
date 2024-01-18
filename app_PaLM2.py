@@ -13,13 +13,19 @@ import os
 import vertexai
 from flask import Flask, jsonify, render_template, request
 from google.cloud import aiplatform
-from langchain.chains import RetrievalQA
+from langchain.chains import LLMChain, RetrievalQA
+from langchain.memory import ConversationBufferMemory
 from langchain.prompts import PromptTemplate
+from langchain.prompts.chat import (
+    ChatPromptTemplate,
+    HumanMessagePromptTemplate,
+    MessagesPlaceholder,
+)
+from langchain.schema import SystemMessage
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores.faiss import FAISS
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_google_vertexai import ChatVertexAI, VertexAI, VertexAIEmbeddings
 from markdown import markdown
@@ -43,6 +49,12 @@ llm = VertexAI(
     verbose=True,
 )
 
+# Langchain memory를 사용하여 chat history 구성
+memory = ConversationBufferMemory(
+    memory_key="chat_history",
+    return_messages=True,
+)
+
 # pdf 저장폴더
 PDF_DN_FOLDER = "./PDF_DN_FOLDER"
 
@@ -58,39 +70,33 @@ def index():
 def chat():
     query = request.form["msg"]
 
-    # version 1
-    # system = "You are a helpful assistant who translate Korean to English"
-    # human = f"Translate this sentence from Korean to English. {query}"
+    system = "You are a helpful world travel assistant."
+    human = "{text}"
 
-    system = "You are a helpful assistant who is good at large language models"
-    human = f"As an assistant specializing in LLM, please provide accurate answers to the following questions: {query}"
+    template_messages = [
+        SystemMessage(content=system),
+        MessagesPlaceholder(variable_name="chat_history"),
+        HumanMessagePromptTemplate.from_template(human),
+    ]
 
-    # version 2
-    # system = "You are a helpful assistant that translates {input_language} to {output_language}."
-    # human = "{text}"
+    prompt_template = ChatPromptTemplate.from_messages(template_messages)
 
-    prompt = ChatPromptTemplate.from_messages([("system", system), ("human", human)])
+    chain = LLMChain(
+        llm=chat_model,
+        prompt=prompt_template,
+        memory=memory,
+    )
 
-    # chat_model = ChatVertexAI()
-
-    chain = prompt | chat_model
-
-    # version 1
-    response = chain.invoke({})
-
-    # version 2
-    # response = chain.invoke(
-    #     {
-    #         "input_language": "Korean",
-    #         "output_language": "English",
-    #         "text": query,
-    #     }
-    # )
+    response = chain.invoke(
+        {
+            "text": query,
+        }
+    )
 
     # print(response)
-    # print(type(response.content))
+    # print(response["text"])
 
-    return markdown(response.content, extensions=["extra"])
+    return markdown(response["text"], extensions=["extra"])
 
 
 @app.route("/savePdf", methods=["POST"])
