@@ -52,12 +52,12 @@
         <p>Here is Main-Page</p>
         <div class="flex-container">
             <div class="button1">
-                <button onclick="openChatPage(1)">
+                <button onclick="chatMuseum()">
                     <img src="https://i.ibb.co/YhXyXN8/museum.jpg" alt="Button 1">
                 </button>
             </div>
             <div class="button2">
-                <button onclick="openChatPage(2)">
+                <button onclick="chatDiffusion()">
                     <img src="https://i.ibb.co/vqswJ0n/diffusion.jpg" alt="Button 2">
                 </button>
             </div>    
@@ -65,8 +65,11 @@
     </div>
 
     <script>
-        function openChatPage(buttonNumber) {
-            window.location.href = '/chat/' + buttonNumber;
+        function chatMuseum() {
+            window.location.href = '/chatMuseum';
+        }
+        function chatDiffusion() {
+            window.location.href = '/chatDiffusion';
         }
     </script>
 </body>

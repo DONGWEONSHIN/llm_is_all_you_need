@@ -72,7 +72,7 @@ def chatMuseum():
 
 
 @app.route("/chatDiffusion")
-def chatSD():
+def chatDiffusion():
     return render_template("diffusion.html")
 
 
