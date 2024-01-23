@@ -66,6 +66,11 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
+
+
 @app.route("/chatMuseum")
 def chatMuseum():
     return render_template("museum.html")
