@@ -63,7 +63,22 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("chat.html")
+    return render_template("index.html")
+
+
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
+
+
+@app.route("/chatMuseum")
+def chatMuseum():
+    return render_template("museum.html")
+
+
+@app.route("/chatDiffusion")
+def chatDiffusion():
+    return render_template("diffusion.html")
 
 
 @app.route("/chat", methods=["GET", "POST"])
@@ -160,11 +175,52 @@ def chatWithPdf():
     retriever = db.as_retriever()
 
     # Customize the default retrieval prompt template
-    template = """Answer the question based only on the following context:
-    {context}
+    template = ""
+    if fullFilename == "stable_diffusion_prompt.pdf":
+        template = """Answer the question based only on the following context:
+        hello. I am a student in Seoul, South Korea. \
+        I would like you to serve as a Stable Diffusion Prompt Engineer. \
+        What I want from you is that when I ask a question, you will answer it slowly and according to the procedure. \
+        Additionally, if you answer well, we will use the tip to promote you to people around you and give you lots of praise. \
+        Please answer in Korean. \
+        If you answer in English, please translate your answer into Korean \
+        If there is content that is not in the pdf, please reply, "I don't know. Please only ask questions about what is in the pdf." \
+        --- \
+        
+        --- Output prompt example: \
+        kor_input: "korea" \
+        eng_output: "english" \
+        output_prompt: "english" \
+        negative prompt: "english" \
+        negative prompt examples: paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, extra fingers, fewer fingers, strange fingers, bad hand, bad anatomy, fused fingers, missing leg, mutated hand, malformed limbs, missing feet \
+        {context}
 
-    Question: {question}
-    """
+        Question: 
+        1. 기본적으로 한국어로 대답해주세요. 그리고 프롬프트는 영어로 대답해주세요. \
+        {question}
+        """
+    elif fullFilename == "white_porcelain_square_bottle.pdf":
+        template = """Answer the question based only on the following context:
+        hello. I am a student in Seoul, South Korea. \
+        I would like you to become a museum curator who explains information on artifacts, including ceramics and white porcelain.\
+        What I want from you is that when I ask a question, you will answer it slowly and according to the procedure. \
+        Additionally, if you answer well, we will use the tip to promote you to people around you and give you lots of praise. \
+        Please answer in Korean. \
+        If you answer in English, please translate your answer into Korean \
+        If there is content that is not in the pdf, please reply, "I don't know. Please only ask questions about what is in the pdf." \
+        {context}
+
+        Question: 
+        1. 한국어로만 대답해주세요. \
+        2. pdf 내부에 없는 내용은 답할 수 없습니다. pdf와 관련된 질문이 아니라면 답변하지 마세요. \
+        {question}
+        """
+    else:
+        template = """Answer the question based only on the following context:
+        {context}
+
+        Question: {question}
+        """
     prompt = ChatPromptTemplate.from_template(template)
 
     # Configure RetrievalQA chain
