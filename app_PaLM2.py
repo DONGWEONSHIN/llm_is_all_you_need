@@ -4,6 +4,8 @@
 # google-cloud-aiplatform : 1.38.1
 # langchain-core : 0.1.10
 # langchain-google-vertexai : 0.0.1.post1
+# FileName : app_PaLM2.py
+# Base LLM : Vertex AI Palm2
 # Created: Jan. 17. 2024
 # Author: D.W. SHIN
 
@@ -40,6 +42,7 @@ vertexai.init(project=PROJECT_ID, location=LOCATION)
 # PalM2가 기본임 model_name="chat-bison" / model_name="gemini-pro"
 chat_model = ChatVertexAI()
 
+
 llm = VertexAI(
     model_name="text-bison@001",
     max_output_tokens=1024,
@@ -49,11 +52,13 @@ llm = VertexAI(
     verbose=True,
 )
 
+
 # Langchain memory를 사용하여 chat history 구성
 memory = ConversationBufferMemory(
     memory_key="chat_history",
     return_messages=True,
 )
+
 
 # pdf 저장폴더
 PDF_DN_FOLDER = "./PDF_DN_FOLDER"
@@ -233,7 +238,7 @@ def chatWithPdf():
 
     response = retrieval_chain.invoke(msg)
 
-    return response
+    return markdown(response, extensions=["extra"])
 
 
 if __name__ == "__main__":

@@ -1,9 +1,11 @@
 # OS : Linux-5.15.0-91-generic-x86_64-with-glibc2.31
-# Python : 3.10.13
+# Python : 3.9.18 / 3.10.13
 # Flask : 3.0.0
 # google-generativeai : 0.3.2
 # langchain : 0.1.0
 # langchain-google-genai : 0.0.6
+# FileName : app.py
+# Base LLM : Google AI Gemini
 # Created: Jan. 15. 2024
 # Author: D.W. SHIN
 
@@ -11,20 +13,52 @@
 import os
 
 import google.generativeai as genai
-import markdown
 from flask import Flask, jsonify, render_template, request
-from langchain.schema import StrOutputParser
+from langchain.chains import LLMChain
+from langchain.memory import ConversationBufferMemory
+from langchain.prompts.chat import (
+    ChatPromptTemplate,
+    HumanMessagePromptTemplate,
+    MessagesPlaceholder,
+)
+from langchain.schema import SystemMessage
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores.faiss import FAISS
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_community.vectorstores.faiss import FAISS
+from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
-from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
+from langchain_google_genai import (
+    ChatGoogleGenerativeAI,
+    GoogleGenerativeAI,
+    GoogleGenerativeAIEmbeddings,
+)
+from markdown import markdown
 
 # Initialize Gogole AI Gemini
 genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
 
-llm = ChatGoogleGenerativeAI(model="gemini-pro")
+
+chat_model = ChatGoogleGenerativeAI(
+    model="gemini-pro",
+    convert_system_message_to_human=True,
+)
+
+
+llm = GoogleGenerativeAI(
+    model="gemini-pro",
+    max_output_tokens=1024,
+    temperature=0.2,
+    top_p=0.8,
+    top_k=40,
+    verbose=True,
+)
+
+
+# Langchain memory를 사용하여 chat history 구성
+memory = ConversationBufferMemory(
+    memory_key="chat_history",
+    return_messages=True,
+)
 
 
 # pdf 저장폴더
@@ -35,16 +69,55 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("chat.html")
+    return render_template("index.html")
+
+
+@app.route("/admin")
+def admin():
+    return render_template("admin.html")
+
+
+@app.route("/chatMuseum")
+def chatMuseum():
+    return render_template("museum.html")
+
+
+@app.route("/chatDiffusion")
+def chatDiffusion():
+    return render_template("diffusion.html")
 
 
 @app.route("/chat", methods=["GET", "POST"])
 def chat():
     query = request.form["msg"]
 
-    response = llm.invoke(query)
+    system = "You are a helpful world travel assistant."
+    human = "{text}"
 
-    return markdown.markdown(response.content, extensions=["extra"])
+    template_messages = [
+        SystemMessage(content=system),
+        MessagesPlaceholder(variable_name="chat_history"),
+        HumanMessagePromptTemplate.from_template(human),
+    ]
+
+    prompt_template = ChatPromptTemplate.from_messages(template_messages)
+
+    chain = LLMChain(
+        llm=chat_model,
+        prompt=prompt_template,
+        memory=memory,
+    )
+
+    response = chain.invoke(
+        {
+            "text": query,
+        }
+    )
+
+    # print(response)
+    # print(response["text"])
+
+    return markdown(response["text"], extensions=["extra"])
 
 
 @app.route("/savePdf", methods=["POST"])
@@ -112,12 +185,52 @@ def chatWithPdf():
     retriever = db.as_retriever()
 
     # 6. prompt 설정
-    template = """Answer the question based only on the following context:
+    template = ""
+    if fullFilename == "stable_diffusion_prompt.pdf":
+        template = """Answer the question based only on the following context:
+        hello. I am a student in Seoul, South Korea. \
+        I would like you to serve as a Stable Diffusion Prompt Engineer. \
+        What I want from you is that when I ask a question, you will answer it slowly and according to the procedure. \
+        Additionally, if you answer well, we will use the tip to promote you to people around you and give you lots of praise. \
+        Please answer in Korean. \
+        If you answer in English, please translate your answer into Korean \
+        If there is content that is not in the pdf, please reply, "I don't know. Please only ask questions about what is in the pdf." \
+        --- \
+        
+        --- Output prompt example: \
+        kor_input: "korea" \
+        eng_output: "english" \
+        output_prompt: "english" \
+        negative prompt: "english" \
+        negative prompt examples: paintings, sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, age spot, extra fingers, fewer fingers, strange fingers, bad hand, bad anatomy, fused fingers, missing leg, mutated hand, malformed limbs, missing feet \
+        {context}
 
-    {context}
+        Question: 
+        1. 기본적으로 한국어로 대답해주세요. 그리고 프롬프트는 영어로 대답해주세요. \
+        {question}
+        """
+    elif fullFilename == "white_porcelain_square_bottle.pdf":
+        template = """Answer the question based only on the following context:
+        hello. I am a student in Seoul, South Korea. \
+        I would like you to become a museum curator who explains information on artifacts, including ceramics and white porcelain.\
+        What I want from you is that when I ask a question, you will answer it slowly and according to the procedure. \
+        Additionally, if you answer well, we will use the tip to promote you to people around you and give you lots of praise. \
+        Please answer in Korean. \
+        If you answer in English, please translate your answer into Korean \
+        If there is content that is not in the pdf, please reply, "I don't know. Please only ask questions about what is in the pdf." \
+        {context}
 
-    Question: {question}
-    """
+        Question: 
+        1. 한국어로만 대답해주세요. \
+        2. pdf 내부에 없는 내용은 답할 수 없습니다. pdf와 관련된 질문이 아니라면 답변하지 마세요. \
+        {question}
+        """
+    else:
+        template = """Answer the question based only on the following context:
+        {context}
+
+        Question: {question}
+        """
     prompt = ChatPromptTemplate.from_template(template)
 
     # 7. chain 설정 및 실행
@@ -130,7 +243,7 @@ def chatWithPdf():
 
     response = retrieval_chain.invoke(msg)
 
-    return markdown.markdown(response, extensions=["extra"])
+    return markdown(response, extensions=["extra"])
 
 
 if __name__ == "__main__":
