@@ -64,6 +64,7 @@ memory = ConversationBufferMemory(
 # pdf 저장폴더
 PDF_DN_FOLDER = "./PDF_DN_FOLDER"
 
+
 app = Flask(__name__)
 
 

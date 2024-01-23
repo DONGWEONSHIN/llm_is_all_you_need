@@ -14,10 +14,8 @@ import os
 
 import vertexai
 from flask import Flask, jsonify, render_template, request
-from google.cloud import aiplatform
-from langchain.chains import LLMChain, RetrievalQA
+from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferMemory
-from langchain.prompts import PromptTemplate
 from langchain.prompts.chat import (
     ChatPromptTemplate,
     HumanMessagePromptTemplate,
