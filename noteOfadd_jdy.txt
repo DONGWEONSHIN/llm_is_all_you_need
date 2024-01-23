@@ -1,0 +1,11 @@
+5개 file 새로 올림
+
+app_jdy.py
+chat_jdy.js
+위의 두 파일은 git에 있는 코드와 다른 부분이 있어 두 파일 내부에 주석을 달아 놓음.
+특히 chat_jdy.js는 "//JDY***~" 로 시작되는 부분이 제가 작성한 주석임.
+
+front_jdy.html
+chat1_museum.html
+chat2_museum.html
+위의 세 파일은 git에 있는 코드가 아니므로 별도의 주석은 없음. 
