@@ -63,7 +63,17 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("chat.html")
+    return render_template("index.html")
+
+
+@app.route("/chatMuseum")
+def chatMuseum():
+    return render_template("museum.html")
+
+
+@app.route("/chatDiffusion")
+def chatSD():
+    return render_template("diffusion.html")
 
 
 @app.route("/chat", methods=["GET", "POST"])
