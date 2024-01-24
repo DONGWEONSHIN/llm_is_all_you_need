@@ -40,9 +40,17 @@
 						</div>
 						<div id="messageFormeight" class="card-body msg_card_body">
 						</div>
-						<div class="card-footer">
-							<form id="messageArea" class="input-group">
+						<div id="block-pdf" class="card-footer">
+							<form id="messageArea" class="input-group"> <!--style="display:block"-->
                                 <input type="text" id="text" name="msg" placeholder="Type your message..." autocomplete="off" class="form-control type_msg" required/>
+								<div class="input-group-append">
+									<button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
+								</div>
+							</form>
+						</div>
+						<div id="none-pdf" class="card-footer" style="display:none">
+							<form id="messageAreaPdf" class="input-group">
+                                <input type="text" id="text" name="msg" placeholder="Type your PDF..." autocomplete="off" class="form-control type_msg" required/>
 								<div class="input-group-append">
 									<button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
 								</div>

@@ -28,7 +28,7 @@ body,html{
 	border-bottom: 0 !important;
 }
 .card-footer{
-border-radius: 0 0 15px 15px !important;
+	border-radius: 0 0 15px 15px !important;
 	border-top: 0 !important;
 }
 .container{
@@ -133,6 +133,8 @@ border-radius: 0 0 15px 15px !important;
 }
 .user_info p{
 	font-size: 10px;
+	margin-top: auto;
+	margin-bottom: auto;
 	color: rgba(255,255,255,0.6);
 }
 .video_cam{
@@ -217,7 +219,6 @@ border-radius: 0 0 15px 15px !important;
 	background-color: rgba(0,0,0,0.2);
 }
 
-
 /* Upload 버튼 css */
 .pdf_upload_btn{
 	border-radius: 0 10px 10px 0 !important;
@@ -241,7 +242,7 @@ border-radius: 0 0 15px 15px !important;
 	margin:5px 10px 0px 20px;
 }
 
-/*File Select 버튼 css */
+/* File Select 버튼 css */
 .filebox label {
 	display: inline-block;
 	border-radius: 10px 0px 0px 10px !important; /* padding 모서리 둥글게 */
@@ -280,6 +281,35 @@ border-radius: 0 0 15px 15px !important;
 	height: 1px;
 	padding: 0;
 	margin: -1px;*/
+}
+
+/* 버튼 css 추가 */
+.rounded-circle-center{
+	border-radius:50% !important;
+	position: relative;
+	left: 38%;
+}
+
+.user_white{
+	color: white !important;
+}
+
+.user_grey{
+	color: rgba(255,255,255,0.5);
+}
+
+.move_admin_btn{
+	position: absolute;
+	left: 80%;
+	margin:4px 10px 0px 0px;
+}
+.btn-black-white{
+	color:#fff;
+	background-color:rgba(0,0,0,0.3);
+	border-color:rgba(0,0,0,0.3)}
+
+.card-style{
+	height: 20rem;
 }
 
 @media(max-width: 576px){
