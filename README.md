@@ -64,15 +64,21 @@ gcloud auth application-default login
 
 ## 폴더 구조
 ```
+├── IMG
 ├── PDF_DN_FOLDER
 ├── __pycache__
 ├── static
 │   ├── chat.js
 │   └── style.css
 ├── templates
-│   └── chat.html
-├── app.py
+│   ├── admin.html       (변경 - 24.1.24)
+│   ├── diffusion.html   (추가 - 24.1.24)
+│   ├── index.html       (추가 - 24.1.24)
+│   └── museum.html      (추가 - 24.1.24)
+├── .env
+├── .gitignore
 ├── app_PaLM2.py (추가 - 24.1.17)
+├── app.py
 ├── README.md
 ├── requirements.txt
 ├── ver1_app.py
