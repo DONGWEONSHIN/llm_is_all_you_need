@@ -165,8 +165,8 @@ def chatWithPdf():
 
     # 2. pdf split하기
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=50,
+        chunk_size=10000,
+        chunk_overlap=1000,
         separators=["\n\n", "\n", ".", "!", "?", ",", " ", ""],
     )
     doc_splits = text_splitter.split_documents(documents)
