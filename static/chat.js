@@ -33,6 +33,9 @@ function upload() {
 */
 
 // html button function
+function main() {
+  window.location.href = '/';
+}
 function admin() {
   window.location.href = '/admin';
 }

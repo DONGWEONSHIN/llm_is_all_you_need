@@ -312,6 +312,42 @@ body,html{
 	height: 20rem;
 }
 
+.card-header-left{
+	padding: 0;
+	margin-bottom: 0;
+	background-color: rgba(0,0,0,.03);
+	border-bottom: 1px solid rgba(0,0,0,.125);
+	font-size: 12px;
+}
+
+.card-none-btn{
+	pointer-events: none;
+}
+
+.card-obliqueline-btn {
+    background: repeating-linear-gradient(
+		120deg,
+		rgb(82, 172, 255), 
+		rgb(82, 172, 255) 15px, 
+		rgb(252, 252, 252) 0, 
+		rgb(252, 252, 252) 30px);
+	/* with multiple color stop lengths */
+	background-image: repeating-linear-gradient(
+		120deg,
+		transparent 0 5px,
+		rgb(68, 143, 254) 5px 7px
+	  );
+}
+
+.card-header-center{
+	text-align: center;
+	padding: 0;
+	margin-bottom: 40px;
+	font-size: 45px;
+	font-style: italic;
+	font-weight: bold;
+}
+
 @media(max-width: 576px){
 	.contacts_card{
 	margin-bottom: 15px !important;

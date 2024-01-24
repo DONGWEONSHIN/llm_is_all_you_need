@@ -21,7 +21,8 @@
 						<div class="card-header msg_head">
 							<div class="d-flex bd-highlight">
 								<div class="img_cont">
-									<img src="https://i.ibb.co/RG8HdcZ/picture11.png" class="rounded-circle user_img"/>
+									<img src="https://i.ibb.co/RG8HdcZ/picture11.png" class="rounded-circle user_img" onclick="main()" class="btn"/>
+									
 									<!-- <span class="online_icon"></span> -->
 								</div>
 								<div class="user_info">
@@ -41,7 +42,7 @@
 						</div>
 						<div class="card-footer">
 							<form id="messageAreaDiffusion" class="input-group">
-                                <input type="text" id="text" name="msg" placeholder="Type your message..." autocomplete="off" class="form-control type_msg" required/>
+                                <input type="text" id="text" name="msg" placeholder="한글로 입력 후 'Enter Key'를 눌러주세요." autocomplete="off" class="form-control type_msg" required/>
 								<div class="input-group-append">
 									<button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
 								</div>
