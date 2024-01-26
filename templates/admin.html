@@ -18,11 +18,11 @@
 						<div class="card-header msg_head">
 							<div class="d-flex bd-highlight">
 								<div class="img_cont">
-									<img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img">
+									<img src="https://i.ibb.co/cYpQYRX/sesac-logo.png" class="rounded-circle user_img" onclick="main()">
 									<span class="online_icon"></span>
 								</div>
 								<div class="user_info">
-									<span>ChatBot</span>
+									<span>Admin Bot</span>
 									<p>Ask me anything!</p>
 								</div>
 								<!-- upload button 추가 부분-->
@@ -42,7 +42,7 @@
 						</div>
 						<div id="block-pdf" class="card-footer" style="display:block"> <!--style="display:block"-->
 							<form id="messageArea" class="input-group"> 
-                                <input type="text" id="text" name="msg" placeholder="Type your message..." autocomplete="off" class="form-control type_msg" required/>
+                                <input type="text" id="text" name="msg" placeholder="한글을 입력 후 'Enter key'를 눌러주세요." autocomplete="off" class="form-control type_msg" required/>
 								<div class="input-group-append">
 									<button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
 								</div>
@@ -50,7 +50,7 @@
 						</div>
 						<div id="none-pdf" class="card-footer" style="display:block"> <!--style="display:none"-->
 							<form id="messageAreaPdf" class="input-group">
-                                <input type="text" id="text" name="msg" placeholder="Type your PDF..." autocomplete="off" class="form-control type_msg" required/>
+                                <input type="text" id="text" name="msg" placeholder="PDF 파일을 업로드 후 한글을 입력해주세요." autocomplete="off" class="form-control type_msg" required/>
 								<div class="input-group-append">
 									<button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
 								</div>

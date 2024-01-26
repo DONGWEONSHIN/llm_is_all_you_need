@@ -67,7 +67,7 @@ $(document).ready(function() {                      // .ready document가 실행
           type: "POST",
           url: "/chat",                             //  /chat /chatWithPdf
       }).done(function(data) {                      // .done 서버로부터 응답이 성공적으로 도착하면 실행되는 함수
-          var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
+          var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/cYpQYRX/sesac-logo.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
           $("#messageFormeight").append($.parseHTML(botHtml));    // #messageFormeight에 botHtml을 추가 
       });                                                         // parseHTML은 문자열로 표현된 HTML을 DOM요소로 변환 -> 변환된 Html 요소를 #messageFormeight에 추가
       event.preventDefault();                       // form 태그는 기본적으로 페이지 새로고침을 하지만 이것을 방지
@@ -123,7 +123,7 @@ $(document).ready(function() {                      // .ready document가 실행
           type: "POST",
           url: "/chatWithPdf",                           
       }).done(function(data) {                      
-          var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
+          var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/R9Wpxpk/circular-chungjahyanngro.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
           $("#messageFormeight").append($.parseHTML(botHtml));     
       });                                                         
       event.preventDefault();                       
@@ -151,7 +151,7 @@ $(document).ready(function() {                      // .ready document가 실행
           type: "POST",
           url: "/chatWithPdf",                             
       }).done(function(data) {                      
-          var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
+          var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/RG8HdcZ/picture11.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
           $("#messageFormeight").append($.parseHTML(botHtml));    
       });                                                         
       event.preventDefault();                       
