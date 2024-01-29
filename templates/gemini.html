@@ -21,27 +21,36 @@
 						<div class="card-header msg_head">
 							<div class="d-flex bd-highlight">
 								<div class="img_cont">
-									<img src="https://i.ibb.co/ZG9fvyR/history-museum.png" class="rounded-circle user_img" onclick="main()"/>
+									<img src="https://i.ibb.co/g71jY0h/gemini-logo.jpg" class="rounded-circle user_img" onclick="main()"/>
 									<!-- <span class="online_icon"></span> -->
 								</div>
 								<div class="user_info">
-									<span>Museum Bot</span>
+									<span>Gemini</span>
 									<p>ask me anything!</p>
 								</div>
-								
 								<!-- 새로 추가한 부분 -->
 								<div class="user_info p">
 									<p class="a"></p>
 									<p class="b">First, try saying “Hello” in Korean!<br>
-										I am a museum historian.<br>
-										Ask about Korea’s modern and contemporary history!</p>
+										I am a Google Gemini<br>
+										Ask me anything.</p>
 								</div>
+								<div class="filebox">
+									<form id="uploadForm" enctype="multipart/form-data">
+										<label for="fileupload">File Select</label>
+										<input type="file" id="fileupload" class="pdf_fileselect_btn"></input>
+										<!--<button onclick="upload()" class="pdf_upload_btn">Upload</button>-->
+										<button type="submit" class="pdf_upload_btn">Upload</button>
+										<p id="resultUploadPath"></p>
+									</form>
+								</div>
+								<!-- 추가 부분 끝-->
 							</div>
 						</div>
 						<div id="messageFormeight" class="card-body msg_card_body">
 						</div>
 						<div class="card-footer">
-							<form id="messageAreaMuseum" class="input-group">
+							<form id="messageAreaGemini" class="input-group">
                                 <input type="text" id="text" name="msg" placeholder="한글을 입력 후 'Enter Key'를 눌러주세요." autocomplete="off" class="form-control type_msg" required/>
 								<div class="input-group-append">
 									<button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
