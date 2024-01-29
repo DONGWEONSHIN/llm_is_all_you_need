@@ -3,6 +3,7 @@
 ## 목적
 - Gemini를 이용하여 PDF를 업로드 후, RAG 구현하여 PDF에 있는 내용을 질의 (1차, 2차)
 - Palm2를 이용하여 RAG 구성 (3차)
+- Palm2, Gemini 등 다수의 LLM 통합 작업
 
 
 
@@ -24,7 +25,9 @@
 - 2차 시도
 - 2024.1.15 ~ 2024.1.16
 - 3차
-- 2024.1.17 ~
+- 2024.1.17 ~ 2024.1.26
+- 4차
+- 2024.1.29 ~
 
 
 
@@ -77,7 +80,10 @@ gcloud auth application-default login
 │   └── museum.html      (추가 - 24.1.24)
 ├── .env
 ├── .gitignore
-├── app_PaLM2.py (추가 - 24.1.17)
+├── app_Gemini.py   (추가 - 24.1.29)
+├── app_PaLM2.py    (추가 - 24.1.17)
+├── model_Gemini.py (추가 - 24.1.29)
+├── model_Palm2.py  (추가 - 24.1.29)
 ├── app.py
 ├── README.md
 ├── requirements.txt
@@ -145,10 +151,23 @@ langchain-google-vertexai==0.0.1
 
 
 
+### 4차 - LLM 통합 작업
+1. 프론트에서 "model_type"을 지정해야 합니다.
+2. model_type에는 아래와 같은 모델을 지정 할 수 있습니다.
+```
+# MODEL_TYPE = "PALM2"
+# MODEL_TYPE = "GEMINI"
+
+MODEL_TYPE = request.form["model_type"]
+```
+
+
+
 
 ## 개발 중인 사항
 1. 화면에서 PDF 업로드 후 질의를 시작하기 위해 js에서 /chatPdf로 함수를 변경해서 호출 해야 함
 2. 화면 UI/UX를 변경할 예정임
+3. 평가 지표 작업 중
 
 
 
