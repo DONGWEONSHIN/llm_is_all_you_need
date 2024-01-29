@@ -4,7 +4,7 @@
 # google-generativeai : 0.3.2
 # langchain : 0.1.0
 # langchain-google-genai : 0.0.6
-# FileName : app.py
+# FileName : app_Gemini.py
 # Base LLM : Google AI Gemini
 # Created: Jan. 15. 2024
 # Author: D.W. SHIN
