@@ -45,6 +45,9 @@ function chatMuseum() {
 function chatDiffusion() {
   window.location.href = '/chatDiffusion';
 }
+function chatGemini() {
+  window.location.href = '/chatGemini';
+}
 
 $(document).ready(function() {                      // .ready document가 실행되면 한 번만 로드되는 함수
   $("#messageArea").on("submit", function(event) {  // .on id가 messageArea의 form 태그에 submit 이벤트가 발생하면 function() 함수를 실행
@@ -63,6 +66,7 @@ $(document).ready(function() {                      // .ready document가 실행
       $.ajax({                                      // ajax로 서버와 통신
           data: {                                   // data안에 msg : rawText를 담는 기능
               msg: rawText,
+              model_type: 'GEMINI'
           },
           type: "POST",
           url: "/chat",                             //  /chat /chatWithPdf
@@ -118,12 +122,13 @@ $(document).ready(function() {                      // .ready document가 실행
       $.ajax({                                      
           data: {                                   
               msg: rawText,
-              filename:'white_porcelain_square_bottle.pdf'	
+              filename:'Pre_modern_Korean_history1.pdf',
+              model_type: 'PALM2'
           },
           type: "POST",
           url: "/chatWithPdf",                           
       }).done(function(data) {                      
-          var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/R9Wpxpk/circular-chungjahyanngro.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
+          var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/ZG9fvyR/history-museum.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
           $("#messageFormeight").append($.parseHTML(botHtml));     
       });                                                         
       event.preventDefault();                       
@@ -146,7 +151,8 @@ $(document).ready(function() {                      // .ready document가 실행
       $.ajax({                                      
           data: {                                   
               msg: rawText,
-              filename:'stable_diffusion_prompt.pdf'	
+              filename:'stable_diffusion_prompt.pdf',
+              model_type: 'PALM2'	
           },
           type: "POST",
           url: "/chatWithPdf",                             
@@ -155,6 +161,34 @@ $(document).ready(function() {                      // .ready document가 실행
           $("#messageFormeight").append($.parseHTML(botHtml));    
       });                                                         
       event.preventDefault();                       
+    });
+
+    // Gemini
+    $("#messageAreaGemini").on("submit", function(event) {  
+      const date = new Date();                      
+      const hour = date.getHours();                 
+      const minute = date.getMinutes();             
+      const str_time = hour+":"+minute;             
+      var rawText = $("#text").val();               
+
+      var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + rawText + '<span class="msg_time_send">'+ str_time + '</span></div><div class="img_cont_msg"><img src="https://i.ibb.co/d5b84Xw/Untitled-design.png" class="rounded-circle user_img_msg"></div></div>';
+      
+      $("#text").val("");
+      $("#messageFormeight").append(userHtml);     
+
+
+      $.ajax({                                      
+          data: {                                   
+              msg: rawText,
+              model_type: 'GEMINI'
+          },
+          type: "POST",
+          url: "/chat",                             
+      }).done(function(data) {                      
+          var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/g71jY0h/gemini-logo.jpg" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
+          $("#messageFormeight").append($.parseHTML(botHtml));    
+      });                                                         
+      event.preventDefault();                      
     });
 
     //

@@ -202,10 +202,10 @@ def chatWithPdf():
         1. 기본적으로 한국어로 대답해주세요. 그리고 프롬프트는 영어로 대답해주세요. \
         {question}
         """
-    elif fullFilename == "white_porcelain_square_bottle.pdf":
+    elif fullFilename == "Pre_modern_Korean_history1.pdf":
         template = """Answer the question based only on the following context:
         hello. I am a student in Seoul, South Korea. \
-        I would like you to become a museum curator who explains information on artifacts, including ceramics and white porcelain.\
+        Become a historian and explain Korea’s pre-modern Korean history. \
         What I want from you is that when I ask a question, you will answer it slowly and according to the procedure. \
         Additionally, if you answer well, we will use the tip to promote you to people around you and give you lots of praise. \
         Please answer in Korean. \
@@ -215,7 +215,8 @@ def chatWithPdf():
 
         Question: 
         1. 한국어로만 대답해주세요. \
-        2. pdf 내부에 없는 내용은 답할 수 없습니다. pdf와 관련된 질문이 아니라면 답변하지 마세요. \
+        2. 당신은 역사학자이며 한국의 근현대사에 대해 잘 알고 있습니다. \
+        3. pdf 내부에 없는 내용은 답할 수 없습니다. pdf와 관련된 질문이 아니라면 답변하지 마세요. \
         {question}
         """
     else:
