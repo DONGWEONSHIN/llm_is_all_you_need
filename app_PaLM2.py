@@ -88,7 +88,7 @@ def chatDiffusion():
 def chat():
     query = request.form["msg"]
 
-    system = "You are a helpful world travel assistant."
+    system = "You are a helpful assistant."
     human = "{text}"
 
     template_messages = [
