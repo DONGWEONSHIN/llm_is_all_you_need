@@ -36,14 +36,14 @@ from markdown import markdown
 model_path = expanduser("llama-2-13b-chat.Q5_K_M.gguf")
 
 
-llm = LlamaCpp(
+llmConfig = LlamaCpp(
     model_path=model_path,
     streaming=False,
     n_ctx=4096,
 )
 
 
-model = Llama2Chat(llm=llm)
+model = Llama2Chat(llm=llmConfig)
 
 
 memory = ConversationBufferMemory(
@@ -221,7 +221,7 @@ def chatWithPdf():
     retrieval_chain = (
         {"context": retriever, "question": RunnablePassthrough()}
         | prompt
-        | llm
+        | model
         | StrOutputParser()
     )
 
