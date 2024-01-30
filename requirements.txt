@@ -12,3 +12,13 @@ faiss-cpu==1.7.4
 # Vertex AI Palm2
 google-cloud-aiplatform==1.38.1
 langchain-google-vertexai==0.0.1
+
+# Llama2
+ctransformers
+langchain-experimental
+langchain-community
+llama-cpp-python
+chardet
+
+# HuggingFace
+sentence-transformers
