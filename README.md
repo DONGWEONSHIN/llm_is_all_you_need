@@ -65,6 +65,14 @@ gcloud auth application-default login
 ````
 
 
+
+### Llama2 모델 다운 받기
+````
+https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF
+````
+
+
+
 ## 폴더 구조
 ```
 ├── IMG
@@ -74,19 +82,22 @@ gcloud auth application-default login
 │   ├── chat.js
 │   └── style.css
 ├── templates
-│   ├── admin.html       (변경 - 24.1.24)
-│   ├── diffusion.html   (추가 - 24.1.24)
-│   ├── index.html       (추가 - 24.1.24)
-│   └── museum.html      (추가 - 24.1.24)
+│   ├── admin.html
+│   ├── diffusion.html
+│   ├── index.html
+│   └── museum.html
 ├── .env
 ├── .gitignore
-├── app_Gemini.py   (추가 - 24.1.29)
-├── app_PaLM2.py    (추가 - 24.1.17)
-├── model_Gemini.py (추가 - 24.1.29)
-├── model_Palm2.py  (추가 - 24.1.29)
+├── app_Gemini.py
+├── app_Llama2.py
+├── app_PaLM2.py
+├── model_Gemini.py
+├── model_Llama2.py
+├── model_Palm2.py
 ├── app.py
 ├── README.md
 ├── requirements.txt
+├── llama-2-13b-chat.Q5_K_M.gguf
 ├── ver1_app.py
 └── ver1_requirements.txt
 ```
@@ -157,10 +168,11 @@ langchain-google-vertexai==0.0.1
 ```
 # MODEL_TYPE = "PALM2"
 # MODEL_TYPE = "GEMINI"
+# MODEL_TYPE = "LLAMA2"
 
 MODEL_TYPE = request.form["model_type"]
 ```
-
+3. Llama2 모델 추가
 
 
 
