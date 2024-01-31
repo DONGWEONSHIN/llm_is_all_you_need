@@ -5,7 +5,7 @@
 # langchain : 0.1.0
 # langchain-google-genai : 0.0.6
 # FileName : app.py
-# Base LLM : Vertex AI Palm2 / Google AI Gemini
+# Base LLM : Vertex AI Palm2 / Google AI Gemini / Llama2
 # Created: Jan. 29. 2024
 # Author: D.W. SHIN
 
@@ -16,6 +16,7 @@ from flask import Flask, jsonify, render_template, request
 from markdown import markdown
 
 from model_Gemini import Gemini
+from model_Llama2 import Llama2
 from model_Palm2 import Palm2
 
 # pdf 저장폴더
@@ -72,6 +73,13 @@ def chat():
         g_llm = Gemini(google_api_key=GOOGLE_API_KEY)
 
         result = g_llm.chat(msg=query)
+
+    elif MODEL_TYPE == "LLAMA2":
+        MODEL_PATH = "llama-2-13b-chat.Q5_K_M.gguf"
+
+        l_llm = Llama2(model_path=MODEL_PATH)
+
+        result = l_llm.chat(msg=query)
 
     return result
 
@@ -133,6 +141,17 @@ def chatWithPdf():
         g_llm = Gemini(google_api_key=GOOGLE_API_KEY)
 
         result = g_llm.chatWithPdf(
+            msg=MSG,
+            fullFilename=FULLFILENAME,
+            pdf_dn_folder=PDF_DN_FOLDER,
+        )
+
+    elif MODEL_TYPE == "LLAMA2":
+        MODEL_PATH = "llama-2-13b-chat.Q5_K_M.gguf"
+
+        l_llm = Llama2(model_path=MODEL_PATH)
+
+        result = l_llm.chatWithPdf(
             msg=MSG,
             fullFilename=FULLFILENAME,
             pdf_dn_folder=PDF_DN_FOLDER,

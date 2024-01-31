@@ -14,7 +14,6 @@ from os.path import expanduser
 from ctransformers import AutoModelForCausalLM
 from flask import Flask, jsonify, render_template, request
 from langchain.chains import LLMChain
-from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts.chat import (
     ChatPromptTemplate,
@@ -24,7 +23,7 @@ from langchain.prompts.chat import (
 from langchain.schema import SystemMessage
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.embeddings import LlamaCppEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.llms.llamacpp import LlamaCpp
 from langchain_community.vectorstores.faiss import FAISS
 from langchain_core.output_parsers import StrOutputParser
@@ -155,7 +154,10 @@ def chatWithPdf():
     model_name = "sentence-transformers/all-mpnet-base-v2"
     model_kwargs = {"device": "cuda"}
 
-    embeddings = HuggingFaceEmbeddings(model_name=model_name, model_kwargs=model_kwargs)
+    embeddings = HuggingFaceEmbeddings(
+        model_name=model_name,
+        model_kwargs=model_kwargs,
+    )
 
     # Vector Store Indexing
     db = FAISS.from_documents(doc_splits, embeddings)

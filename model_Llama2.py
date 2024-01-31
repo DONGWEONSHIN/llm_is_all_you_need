@@ -12,9 +12,7 @@ import os
 from os.path import expanduser
 
 from ctransformers import AutoModelForCausalLM
-from flask import Flask, jsonify, render_template, request
 from langchain.chains import LLMChain
-from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts.chat import (
     ChatPromptTemplate,
@@ -24,7 +22,7 @@ from langchain.prompts.chat import (
 from langchain.schema import SystemMessage
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.embeddings import LlamaCppEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.llms.llamacpp import LlamaCpp
 from langchain_community.vectorstores.faiss import FAISS
 from langchain_core.output_parsers import StrOutputParser
@@ -34,15 +32,7 @@ from markdown import markdown
 
 
 class Llama2:
-    model_path = expanduser("llama-2-13b-chat.Q5_K_M.gguf")
-
-    llmConfig = LlamaCpp(
-        model_path=model_path,
-        streaming=False,
-        n_ctx=4096,
-    )
-
-    model = Llama2Chat(llm=llmConfig)
+    model = ""
 
     memory = ConversationBufferMemory(
         memory_key="chat_history",
@@ -50,11 +40,17 @@ class Llama2:
     )
 
     def __init__(self, model_path):
-        self.model_path = model_path
+        self.model_path = expanduser(model_path)
 
+        self.llmConfig = LlamaCpp(
+            model_path=self.model_path,
+            streaming=False,
+            n_ctx=4096,
+        )
 
+        Llama2.model = Llama2Chat(llm=self.llmConfig)
 
-    def chat(self. msg):
+    def chat(self, msg):
         query = msg
 
         template_messages = [
@@ -78,7 +74,6 @@ class Llama2:
 
         return markdown(response["text"], extensions=["extra"])
 
-
     def chatWithPdf(self, msg, fullFilename, pdf_dn_folder):
         fileFullPath = os.path.join(pdf_dn_folder, fullFilename)
 
@@ -98,7 +93,10 @@ class Llama2:
         model_name = "sentence-transformers/all-mpnet-base-v2"
         model_kwargs = {"device": "cuda"}
 
-        embeddings = HuggingFaceEmbeddings(model_name=model_name, model_kwargs=model_kwargs)
+        embeddings = HuggingFaceEmbeddings(
+            model_name=model_name,
+            model_kwargs=model_kwargs,
+        )
 
         # Vector Store Indexing
         db = FAISS.from_documents(doc_splits, embeddings)
@@ -171,7 +169,3 @@ class Llama2:
         response = retrieval_chain.invoke(msg)
 
         return markdown(response, extensions=["extra"])
-
-
-if __name__ == "__main__":
-    app.run()
