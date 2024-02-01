@@ -36,88 +36,47 @@ import pandas as pd
 import re
 import numpy as np
 
-# answer + palm prompt 
-for i in range(len(listAnswerVal)):
-    listAnswerVal[i] = list(map(lambda x: re.sub(r'[^\w]', ' ', x), listAnswerVal[i]))
+# 특수문자 제거 
+def remove_characters(listmodelVal):
+    for idx in range(len(listmodelVal)):
+        listmodelVal[idx] = list(map(lambda x: re.sub(r'[^\w]', ' ', x), listmodelVal[idx]))
+    
+    df_model = pd.DataFrame(listmodelVal)
+    return df_model
 
-df_answer = pd.DataFrame(listAnswerVal)
-
-for j in range(len(listPalmVal)):
-    listPalmVal[i] = list(map(lambda x: re.sub(r'[^\w]', ' ', x), listPalmVal[i]))
-
-df_palm = pd.DataFrame(listPalmVal)
-
-mix_df = pd.concat([df_answer, df_palm], axis=1, ignore_index=True)
-
-
+# 데이터 합치기
+def df_mix(df_answer, df_model):
+    df_mixDf = pd.concat([df_answer, df_model], axis=1, ignore_index=True)
+    return df_mixDf
 
 
-# 문장간 유사도 측정
+# 문장간 유사도 측정 (2차 함수 정리)
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# 데이터프레임 30행을 차례대로 반복하고 (answer prompt, palm prompt)로 출력하면서 형변환하기
-#for z in mix_df.index:
-#    sentences = f'("{mix_df[0][z]}", "{mix_df[1][z]}")' 
-    #print(sentences)  
+def sentences_similarities(df_mixDf, stop_words=None):
+    for idx in df_mixDf.index:
+        sentences = df_mixDf[0][idx], df_mixDf[1][idx]
+        sentences = np.array(sentences)
 
-#sentences_ = np.array(["A photo of a cat sitting on top of a building", "my name is jinhwan. photo of a cat"])
-#print(sentences_)
-#tfidf_vectorizer = TfidfVectorizer(stop_words='english')
-#tfidf_matrix = tfidf_vectorizer.fit_transform(sentences_)
-#print(tfidf_matrix.toarray())
-    #print(tfidf_vectorizer.get_feature_names_out()) # 각 문장의 단어가 어떻게 토큰화 되었는지 보여준다.
+        tfidf_vectorizer = TfidfVectorizer(stop_words='english') # stop_words='english'
+        tfidf_matrix = tfidf_vectorizer.fit_transform(sentences)
 
-#print(tfidf_matrix[0:1].toarray())
-#cosine_similarities = cosine_similarity(tfidf_matrix)
-#print(cosine_similarities[0])
+        cosine_similarities = cosine_similarity(tfidf_matrix)
+        print(cosine_similarities[0])
 
 
+df_answer = remove_characters(listAnswerVal)
+df_palm = remove_characters(listPalmVal)
+df_mixPalm = df_mix(df_answer, df_palm)
 
-# 문장간 유사도 측정 (1차 정리)
-for x in mix_df.index:
-    sentence = mix_df[0][x], mix_df[1][x]
-    sentence = np.array(sentence)
-    #sentence_palm = np.array([sentence_palm])
-    #print(sentence)
+df_gpt = remove_characters(listGptVal)
+df_mixGpt = df_mix(df_answer, df_gpt)
 
-    tfidf_vectorizer = TfidfVectorizer() # stop_words='english'
-    tfidf_matrix = tfidf_vectorizer.fit_transform(sentence)
-    #tfidf_matrix_palm = tfidf_vectorizer.fit_transform(sentence_palm)
+df_gemini = remove_characters(listGeminiVal)
+df_mixGemini = df_mix(df_answer, df_gemini)
 
-    cosine_similarities = cosine_similarity(tfidf_matrix)
-    print(cosine_similarities[0])
-
-
-
-
-
-
-#for z in mix_df.index:
-#    answer_sentence = np.array([f"{mix_df[0][z]}"])
-#    palm_sentence = f'("{mix_df[1][z]}")'
-#    #print(answer_sentence)
-#
-#    tfidf_vectorizer = TfidfVectorizer(stop_words='english')
-#    #print(tfidf_vectorizer.get_feature_names_out()) # 각 문장의 단어가 어떻게 토큰화 되었는지 보여준다.
-#    #print(tfidf_vectorizer.get_stop_words()) # 영어 불용어 사전을 보여준다. 
-#
-#
-#    tfidf_matrix_answer = tfidf_vectorizer.fit_transform(answer_sentence)
-#    print(tfidf_matrix_answer[0:].toarray())
-#
-#
-#    #tfidf_matrix_palm = tfidf_vectorizer.fit_transform([palm_sentence])
-
-
-#print(tfidf_matrix_answer)
-#print(tfidf_matrix_palm)
-    
-    #cosine_similarities = cosine_similarity(tfidf_matrix_answer)
-    #print(cosine_similarities[0])
-#print(cosine_similarities)
-
-
-
-
-#df.to_csv("D:/jjh/llm_is_all_you_need/palm_text.csv", index=False)
+if __name__ == "__main__":
+    sentences_similarities(df_mixPalm)
+    sentences_similarities(df_mixGpt)
+    sentences_similarities(df_mixGemini)
