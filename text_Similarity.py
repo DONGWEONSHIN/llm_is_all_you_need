@@ -1,3 +1,13 @@
+# OS : Window 11 Pro 
+# Python : 3.9.18
+# gspread : 6.0.0
+# scikit-learn : 1.4.0
+# pandas : 2.2.0
+# FileName : text_Silmilarity
+# Created : Feb. 1. 2024
+# Author : J.H. JEON
+# example : Google spread sheet API(GCP)를 크롤링하여 stable diffusion의 입력 값으로 들어갈 정답 프롬프트와 생성된 프롬프트 문장의 유사도를 비교하는 코드. 
+
 import gspread
 
 filename = "C:/Users/SBA/AppData/Roaming/gspread/proj-team-3-0387d2cb9dba.json"
@@ -29,12 +39,12 @@ listAnswerVal = list(answerVal)
 listPalmVal = list(palmVal)
 listGptVal = list(gptVal)
 listGeminiVal = list(geminiVal)
-#print(strPalmVal)
+
 
 # pandas
-import pandas as pd
 import re
 import numpy as np
+import pandas as pd
 
 # 특수문자 제거 
 def remove_characters(listmodelVal):
@@ -59,10 +69,10 @@ def sentences_similarities(df_mixDf, stop_words=None):
         sentences = df_mixDf[0][idx], df_mixDf[1][idx]
         sentences = np.array(sentences)
 
-        tfidf_vectorizer = TfidfVectorizer(stop_words='english') # stop_words='english'
+        tfidf_vectorizer = TfidfVectorizer(stop_words='english')
         tfidf_matrix = tfidf_vectorizer.fit_transform(sentences)
 
-        cosine_similarities = cosine_similarity(tfidf_matrix)
+        cosine_similarities = cosine_similarity(tfidf_matrix) # cosine similarity
         print(cosine_similarities[0])
 
 
@@ -76,7 +86,10 @@ df_mixGpt = df_mix(df_answer, df_gpt)
 df_gemini = remove_characters(listGeminiVal)
 df_mixGemini = df_mix(df_answer, df_gemini)
 
+
 if __name__ == "__main__":
     sentences_similarities(df_mixPalm)
+    print("---")
     sentences_similarities(df_mixGpt)
+    print("---")
     sentences_similarities(df_mixGemini)
