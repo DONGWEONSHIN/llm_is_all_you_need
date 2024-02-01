@@ -39,6 +39,7 @@ llmConfig = LlamaCpp(
     model_path=model_path,
     streaming=False,
     n_ctx=4096,
+    n_gpu_layers=50,
 )
 
 
