@@ -6,7 +6,8 @@
 # FileName : text_Silmilarity
 # Created : Feb. 1. 2024
 # Author : J.H. JEON
-# example : Google spread sheet API(GCP)를 크롤링하여 stable diffusion의 입력 값으로 들어갈 정답 프롬프트와 생성된 프롬프트 문장의 유사도를 비교하는 코드. 
+# example : Google spread sheet API(GCP)를 크롤링하여 stable diffusion의 입력 값으로 들어갈 정답 프롬프트와 생성된 프롬프트 문장의 유사도를 비교하는 코드.
+# reference : https://meir.tistory.com/162
 
 import gspread
 
@@ -29,10 +30,10 @@ answerVal = worksheet_list[2].get('D15:D44') # 30행 # <class 'gspread.worksheet
 palmVal = worksheet_list[2].get('E15:E44') # 30행
 
 # GPT4 생성된 프롬프트 전체
-gptVal = worksheet_list[2].get('J15:J44')
+gptVal = worksheet_list[2].get('K15:K44')
 
 # Gemini 생성된 프롬프트 전체
-geminiVal = worksheet_list[2].get('O15:O44')
+geminiVal = worksheet_list[2].get('Q15:Q44')
 
 # type 변환
 listAnswerVal = list(answerVal)
@@ -60,7 +61,7 @@ def df_mix(df_answer, df_model):
     return df_mixDf
 
 
-# 문장간 유사도 측정 (2차 함수 정리)
+# 문장간 유사도 측정
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -88,8 +89,8 @@ df_mixGemini = df_mix(df_answer, df_gemini)
 
 
 if __name__ == "__main__":
-    sentences_similarities(df_mixPalm)
-    print("---")
-    sentences_similarities(df_mixGpt)
-    print("---")
+    #sentences_similarities(df_mixPalm)
+    #print("---")
+    #sentences_similarities(df_mixGpt)
+    #print("---")
     sentences_similarities(df_mixGemini)
