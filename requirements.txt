@@ -16,6 +16,7 @@ langchain-google-vertexai==0.0.1
 # Download Llama2 model
 # https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF
 # https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF
+# https://huggingface.co/LDCC/LDCC-SOLAR-10.7B-GGUF/resolve/main/ggml-model-f16.gguf
 
 # Llama2
 ctransformers==0.2.27        # GPU - # ctransformers[cuda]
