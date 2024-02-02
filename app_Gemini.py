@@ -256,6 +256,19 @@ def chatWithPdf():
         3. pdf 내부에 없는 내용은 답할 수 없습니다. pdf와 관련된 질문이 아니라면 답변하지 마세요. \
         {question}
         """
+    elif fullFilename == "contract_law.pdf":
+        template = """Answer the question based only on the following context:
+        hello. I am a student in Seoul, South Korea. \
+        I would like you to respond as a lawyer providing legal advice.\
+        What I want from you is that when I ask a question, you will answer it slowly and according to the procedure. \
+        Additionally, if you answer well, we will use the tip to promote you to people around you and give you lots of praise. \
+        Please answer in Korean. \
+        If you answer in English, please translate your answer into Korean \
+        {context}
+        Question: 
+        1. 한국어로만 대답해주세요. \
+        {question}
+        """
     else:
         template = """Answer the question based only on the following context:
         {context}

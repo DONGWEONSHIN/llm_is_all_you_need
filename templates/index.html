@@ -15,7 +15,7 @@
 <body>
     <div class="container-fluid h-100">
         <div class="row justify-content-center h-100">		
-            <div class="col-md-8 col-xl-6 chat">
+            <div class="col-xl-10 chat">
                 <div class="card-header-center user_white">
                     LLM Store
                 </div>
@@ -33,8 +33,8 @@
                     </div>
                         <div id="messageFormeight" class="card-body msg_card_body">
                             <div class="container">
-                                <div class="row">
-                                    <div class="col-4">
+                                <div class="row card-row-gap">
+                                    <div class="col-3">
                                         <div class="card card-style">
                                             <div class="card-header user_white">
                                                 <span>Sketch Bot</span>
@@ -42,16 +42,16 @@
                                                     PaLM2
                                                 </div>
                                             </div>
+                                            <div>
                                                 <img src="https://i.ibb.co/RG8HdcZ/picture11.png" class="rounded-circle-center user_img" onclick="chatDiffusion()"/>
+                                            </div>
                                             <div class="card-body">
-                                                <!--<span class="card-title user_white">CF.</span>-->
-                                                <!--<p class="card-subtitle user_grey">PaLM2</p>-->
-                                                <p class="card-text user_grey">Stable Diffusion 이미지를 생성할 수 있는 문장을 만들어보세요!</p>
+                                                <p class="card-text user_grey">Stable Diffusion 이미지를 생성하는 문장을 만들어보세요!</p>
                                                 <button onclick="chatDiffusion()" class="btn btn-primary">Click</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-3">
                                         <div class="card card-style">
                                             <div class="card-header user_white">
                                                 <span>Museum Bot</span>
@@ -59,15 +59,33 @@
                                                     PaLM2
                                                 </div>
                                             </div>
-                                            <img src="https://i.ibb.co/ZG9fvyR/history-museum.png" class="rounded-circle-center user_img" onclick="chatMuseum()"/>
+                                            <div>
+                                                <img src="https://i.ibb.co/ZG9fvyR/history-museum.png" class="rounded-circle-center user_img" onclick="chatMuseum()"/>
+                                            </div>
                                             <div class="card-body user_grey">
-                                                <!--<span class="card-title user_white">Confer</span>-->
                                                 <p class="card-text">근현대사에 대한 정보를 역사학자에게 물어보세요!</p>
                                                 <button onclick="chatMuseum()" class="btn btn-primary">Click</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-3">
+                                        <div class="card card-style">
+                                            <div class="card-header user_white">
+                                                <span>Law Bot</span>
+                                                <div class="card-header-left user_grey">
+                                                    Gemini
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <img src="https://i.ibb.co/nsvQLhH/law-logo.jpg" class="rounded-circle-center user_img" onclick="chatLaw()"/>
+                                            </div>
+                                            <div class="card-body user_grey">
+                                                <p class="card-text">근로 기준법에 대한 정보를 물어보세요!</p>
+                                                <button onclick="chatLaw()" class="btn btn-primary">Click</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
                                         <div class="card card-style">
                                             <div class="card-header user_white">
                                                 <span>Gemini Chat</span>
@@ -75,11 +93,29 @@
                                                     Gemini
                                                 </div>
                                             </div>
-                                            <img src="https://i.ibb.co/g71jY0h/gemini-logo.jpg" class="rounded-circle-center user_img" onclick="chatGemini()"/>
+                                            <div>
+                                                <img src="https://i.ibb.co/g71jY0h/gemini-logo.jpg" class="rounded-circle-center user_img" onclick="chatGemini()"/>
+                                            </div>
                                             <div class="card-body user_grey">
-                                                <!--<span class="card-title user_white">Confer</span>-->
-                                                <p class="card-text">구글 Gemini에게 궁금한 것들을 물어보세요..!</p>
+                                                <p class="card-text">Gemini에게 궁금한 것들을 물어보세요..!</p>
                                                 <button onclick="chatGemini();" class="btn btn-primary">Click</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="card card-style">
+                                            <div class="card-header user_white">
+                                                <span>Llama2 Chat</span>
+                                                <div class="card-header-left user_grey">
+                                                    Llama2 
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <img src="https://i.ibb.co/3v4gsm7/llama2-logo-to.jpg" class="rounded-circle-center user_img" onclick="chatLlama()"/>
+                                            </div>
+                                            <div class="card-body user_grey">
+                                                <p class="card-text">koLlama2에게 궁금한 것을 물어보세요.</p>
+                                                <button onclick="chatLlama();" class="btn btn-primary">Click</button>
                                             </div>
                                         </div>
                                     </div>

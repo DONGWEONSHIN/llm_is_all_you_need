@@ -46,6 +46,21 @@ def chatDiffusion():
     return render_template("diffusion.html")
 
 
+@app.route("/chatLaw")
+def chatLaw():
+    return render_template("law.html")
+
+
+@app.route("/chatGemini")
+def chatGemini():
+    return render_template("gemini.html")
+
+
+@app.route("/chatLlama")
+def chatLlama():
+    return render_template("llama.html")
+
+
 @app.route("/chat", methods=["GET", "POST"])
 def chat():
     # MODEL_TYPE = "PALM2"

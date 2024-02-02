@@ -11,9 +11,12 @@ body,html{
 	margin-bottom: auto;
 }
 .card{
-	height: 500px;
+	height: 760px;
 	border-radius: 15px !important;
 	background-color: rgba(0,0,0,0.4) !important;
+}
+.card-row-gap{
+	row-gap: 20px;
 }
 .contacts_body{
 	padding:  0.75rem 0 !important;
@@ -246,7 +249,7 @@ body,html{
 .filebox label {
 	display: inline-block;
 	border-radius: 10px 0px 0px 10px !important; /* padding 모서리 둥글게 */
-	margin:0px 0 0 245px; /*좌우 움직일때*/
+	margin:0px 0 0 320px; /*좌우 움직일때*/
 	padding: .6em .75em;
 	color: #fff;
 	font-size: 16px; /*inherit;*/
@@ -287,7 +290,9 @@ body,html{
 .rounded-circle-center{
 	border-radius:50% !important;
 	position: relative;
-	left: 38%;
+	right: 50%;
+	left: 50%;
+	transform: translate(-50%, -0%)
 }
 
 .user_white{
@@ -309,7 +314,7 @@ body,html{
 	border-color:rgba(0,0,0,0.3)}
 
 .card-style{
-	height: 20rem;
+	height: 19rem;
 }
 
 .card-header-left{

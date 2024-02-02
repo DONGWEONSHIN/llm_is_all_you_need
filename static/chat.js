@@ -42,11 +42,17 @@ function admin() {
 function chatMuseum() {
   window.location.href = '/chatMuseum';
 }
+function chatLlama() {
+  window.location.href = '/chatLlama';
+}
 function chatDiffusion() {
   window.location.href = '/chatDiffusion';
 }
 function chatGemini() {
   window.location.href = '/chatGemini';
+}
+function chatLaw() {
+  window.location.href = '/chatLaw';
 }
 
 $(document).ready(function() {                      // .ready document가 실행되면 한 번만 로드되는 함수
@@ -66,7 +72,7 @@ $(document).ready(function() {                      // .ready document가 실행
       $.ajax({                                      // ajax로 서버와 통신
           data: {                                   // data안에 msg : rawText를 담는 기능
               msg: rawText,
-              model_type: 'GEMINI'
+              model_type: 'PALM2'
           },
           type: "POST",
           url: "/chat",                             //  /chat /chatWithPdf
@@ -152,12 +158,41 @@ $(document).ready(function() {                      // .ready document가 실행
           data: {                                   
               msg: rawText,
               filename:'stable_diffusion_prompt.pdf',
-              model_type: 'PALM2'	
+              model_type: 'PAML2'	
           },
           type: "POST",
           url: "/chatWithPdf",                             
       }).done(function(data) {                      
           var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/RG8HdcZ/picture11.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
+          $("#messageFormeight").append($.parseHTML(botHtml));    
+      });                                                         
+      event.preventDefault();                       
+    });
+
+    // Law
+    $("#messageAreaLaw").on("submit", function(event) {  
+      const date = new Date();                      
+      const hour = date.getHours();                 
+      const minute = date.getMinutes();             
+      const str_time = hour+":"+minute;             
+      var rawText = $("#text").val();               
+
+      var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + rawText + '<span class="msg_time_send">'+ str_time + '</span></div><div class="img_cont_msg"><img src="https://i.ibb.co/d5b84Xw/Untitled-design.png" class="rounded-circle user_img_msg"></div></div>';
+      
+      $("#text").val("");
+      $("#messageFormeight").append(userHtml);      
+
+
+      $.ajax({                                      
+          data: {                                   
+              msg: rawText,
+              filename:'contract_law.pdf',
+              model_type: 'GEMINI'	
+          },
+          type: "POST",
+          url: "/chatWithPdf",                             
+      }).done(function(data) {                      
+          var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/nsvQLhH/law-logo.jpg" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
           $("#messageFormeight").append($.parseHTML(botHtml));    
       });                                                         
       event.preventDefault();                       
@@ -186,6 +221,34 @@ $(document).ready(function() {                      // .ready document가 실행
           url: "/chat",                             
       }).done(function(data) {                      
           var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/g71jY0h/gemini-logo.jpg" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
+          $("#messageFormeight").append($.parseHTML(botHtml));    
+      });                                                         
+      event.preventDefault();                      
+    });
+
+    // Llama2
+    $("#messageAreaLlama").on("submit", function(event) {  
+      const date = new Date();                      
+      const hour = date.getHours();                 
+      const minute = date.getMinutes();             
+      const str_time = hour+":"+minute;             
+      var rawText = $("#text").val();               
+
+      var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + rawText + '<span class="msg_time_send">'+ str_time + '</span></div><div class="img_cont_msg"><img src="https://i.ibb.co/d5b84Xw/Untitled-design.png" class="rounded-circle user_img_msg"></div></div>';
+      
+      $("#text").val("");
+      $("#messageFormeight").append(userHtml);     
+
+
+      $.ajax({                                      
+          data: {                                   
+              msg: rawText,
+              model_type: 'LLAMA2'
+          },
+          type: "POST",
+          url: "/chat",                             
+      }).done(function(data) {                      
+          var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/3v4gsm7/llama2-logo-to.jpg" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
           $("#messageFormeight").append($.parseHTML(botHtml));    
       });                                                         
       event.preventDefault();                      

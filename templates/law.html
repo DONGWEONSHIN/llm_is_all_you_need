@@ -7,12 +7,9 @@
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}"/>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-		<!-- 수정2 line 11: viewport 추가-->
 		<meta name="viewport"  content="width=device-width, initial-scale=1.0">
 		<meta charset="utf-8">
 	</head>
-	
-	
 	<body>
 		<div class="container-fluid h-100">
 			<div class="row justify-content-center h-100">		
@@ -21,18 +18,19 @@
 						<div class="card-header msg_head">
 							<div class="d-flex bd-highlight">
 								<div class="img_cont">
-									<img src="https://i.ibb.co/g71jY0h/gemini-logo.jpg" class="rounded-circle user_img" onclick="main()"/>
+									<img src="https://i.ibb.co/nsvQLhH/law-logo.jpg" class="rounded-circle user_img" onclick="main()"/>
+									<!-- <span class="online_icon"></span> -->
 								</div>
 								<div class="user_info">
-									<span>Gemini</span>
+									<span>Law Bot</span>
 									<p>ask me anything!</p>
 								</div>
 								<!-- 새로 추가한 부분 -->
 								<div class="user_info p">
 									<p class="a"></p>
 									<p class="b">First, try saying “Hello” in Korean!<br>
-										I am a Google Gemini<br>
-										Ask me anything.</p>
+                                        Ask about the Labor Standards Act!<br>
+									</p>
 								</div>
 								<div class="filebox">
 									<form id="uploadForm" enctype="multipart/form-data">
@@ -49,7 +47,7 @@
 						<div id="messageFormeight" class="card-body msg_card_body">
 						</div>
 						<div class="card-footer">
-							<form id="messageAreaGemini" class="input-group">
+							<form id="messageAreaLaw" class="input-group">
                                 <input type="text" id="text" name="msg" placeholder="한글을 입력 후 'Enter Key'를 눌러주세요." autocomplete="off" class="form-control type_msg" required/>
 								<div class="input-group-append">
 									<button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
@@ -62,3 +60,4 @@
 		</div>
 	</body>
 </html>
+	
