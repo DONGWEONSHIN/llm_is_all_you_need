@@ -4,3 +4,4 @@ __pycache__/
 PDF_DN_FOLDER/
 
 llama*.gguf
+ggml*.gguf
