@@ -7,7 +7,7 @@ python-dotenv==1.0.0
 langchain-google-genai==0.0.6
 langchain==0.1.0
 pypdf==3.17.4
-faiss-cpu==1.7.4
+faiss-cpu==1.7.4             # GPU - # conda install -c pytorch -c nvidia faiss-gpu=1.7.4 mkl=2021 blas=1.0=mkl
 
 # Vertex AI Palm2
 google-cloud-aiplatform==1.38.1
@@ -16,13 +16,20 @@ langchain-google-vertexai==0.0.1
 # Download Llama2 model
 # https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF
 # https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF
+# https://huggingface.co/LDCC/LDCC-SOLAR-10.7B-GGUF/resolve/main/ggml-model-f16.gguf
 
 # Llama2
-ctransformers==0.2.27
+ctransformers==0.2.27        # GPU - # ctransformers[cuda]
 langchain-experimental==0.0.49
 langchain-community==0.0.16
-llama-cpp-python==0.2.36
+llama-cpp-python==0.2.36     # GPU - # CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python --no-cache-dir --verbose
 chardet==5.2.0
 
 # HuggingFace
 sentence-transformers==2.3.0
+
+
+# GPU-version
+# Install pytorch first!!!
+# conda install pytorch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 pytorch-cuda=12.1 -c pytorch -c nvidia
+

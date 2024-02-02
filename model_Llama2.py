@@ -46,6 +46,7 @@ class Llama2:
             model_path=self.model_path,
             streaming=False,
             n_ctx=4096,
+            n_gpu_layers=50,
         )
 
         Llama2.model = Llama2Chat(llm=self.llmConfig)
