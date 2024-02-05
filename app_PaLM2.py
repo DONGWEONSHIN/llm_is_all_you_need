@@ -202,23 +202,40 @@ def chatWithPdf():
         1. 기본적으로 한국어로 대답해주세요. 그리고 프롬프트는 영어로 대답해주세요. \
         {question}
         """
-    elif fullFilename == "Pre_modern_Korean_history1.pdf":
+    # 프롬프트 수정(20240205)
+    elif fullFilename == "Korean_Ancient_History.pdf":
+        
         template = """Answer the question based only on the following context:
-        hello. I am a student in Seoul, South Korea. \
-        Become a historian and explain Korea’s pre-modern Korean history. \
-        What I want from you is that when I ask a question, you will answer it slowly and according to the procedure. \
-        Additionally, if you answer well, we will use the tip to promote you to people around you and give you lots of praise. \
-        Please answer in Korean. \
-        If you answer in English, please translate your answer into Korean \
-        If there is content that is not in the pdf, please reply, "I don't know. Please only ask questions about what is in the pdf." \
+        You are a knowledgeable expert on “Korean_Ancient_History” and I am a Korean-speaking student asking you a question about the content of “Korean_Ancient_History”. \
+        In response to my questions, in principle, you should only answer what is described in “Korean_Ancient_History” and should not answer what you learned from sources other than “Korean_Ancient_History” or what you inferred yourself. \
+        You must answer my questions in the following order. \
+        step 1. Interpret my question in English and fully understand the content of the question. \
+        step 2. Identify the keywords of my question. \
+        step 3. You translate “Korean_Ancient_History” into English and analyze everything in depth. \
+        step 4. Find the sentences that answer my question in “Korean_Ancient_History” and summarize the content in English, using the terms described in “Korean_Ancient_History”. \
+        step 5. When summarizing, summarize within the number of sentences requested in the question, but if the question does not specify a specific number of sentences, summarize within 2 sentences. \
+        step 6. The answers summarized in English are translated into Korean and provided to me. \ 
         {context}
 
-        Question: 
-        1. 한국어로만 대답해주세요. \
-        2. 당신은 역사학자이며 한국의 근현대사에 대해 잘 알고 있습니다. \
-        3. pdf 내부에 없는 내용은 답할 수 없습니다. pdf와 관련된 질문이 아니라면 답변하지 마세요. \
-        {question}
-        """
+        Question:  {question}
+        """   
+    # 프롬프트 수정(20240205)
+    elif fullFilename == "Labor_law.pdf":       
+        template = """Answer the question based only on the following context:
+        You are a knowledgeable expert on “Labor_law” and I am a Korean-speaking student asking you a question about the content of “Labor_law”. \
+        In response to my questions, in principle, you should only answer what is described in “Labor_law” and should not answer what you learned from sources other than “Labor_law” or what you inferred yourself. \
+        You must answer my questions in the following order. \
+        step 1. Interpret my question in English and fully understand the content of the question. \
+        step 2. Identify the keywords of my question. \
+        step 3. You translate “Labor_law” into English and analyze everything in depth. \
+        step 4. Find the sentences that answer my question in “Labor_law” and summarize the content in English, using the terms described in “Labor_law”. \
+        step 5. When summarizing, summarize within the number of sentences requested in the question, but if the question does not specify a specific number of sentences, summarize within 2 sentences. \
+        step 6. The answers summarized in English are translated into Korean and provided to me. \ 
+        {context}
+
+        Question:  {question}
+        """   
+        
     else:
         template = """Answer the question based only on the following context:
         {context}
