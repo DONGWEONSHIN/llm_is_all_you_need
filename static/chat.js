@@ -128,7 +128,7 @@ $(document).ready(function() {                      // .ready document가 실행
       $.ajax({                                      
           data: {                                   
               msg: rawText,
-              filename:'Pre_modern_Korean_history1.pdf',
+              filename:'Korean_Ancient_History.pdf',
               model_type: 'PALM2'
           },
           type: "POST",
@@ -186,7 +186,7 @@ $(document).ready(function() {                      // .ready document가 실행
       $.ajax({                                      
           data: {                                   
               msg: rawText,
-              filename:'contract_law.pdf',
+              filename:'Labor_law.pdf',
               model_type: 'GEMINI'	
           },
           type: "POST",
