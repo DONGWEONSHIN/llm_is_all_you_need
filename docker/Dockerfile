@@ -1,6 +1,8 @@
 #
 # Created: Feb. 08. 2024
 # Author: D.W. SHIN
+# 
+# Install python 3.10 & miniconda 3.10
 #
 # https://github.com/DONGWEONSHIN/llm_is_all_you_need
 #
@@ -128,7 +130,7 @@ RUN set -eux; \
 
 # CMD ["python3"]
 
-# Install miniconda
+# Install miniconda 3.10
 RUN mkdir -p ~/miniconda3
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py310_23.11.0-2-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
 RUN bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
