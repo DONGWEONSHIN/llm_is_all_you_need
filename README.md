@@ -179,7 +179,9 @@ MODEL_TYPE = request.form["model_type"]
 
 
 ### 5차 - Dockerfile 로 실행 하기
+
 1. 실행 방법
+
 1.1 host os에서
 ```
 cd ./docker
