@@ -27,7 +27,9 @@
 - 3차
 - 2024.1.17 ~ 2024.1.26
 - 4차
-- 2024.1.29 ~
+- 2024.1.29 ~ 2024.2.2
+- 5차
+- 2024.2.5 ~
 
 
 
@@ -174,6 +176,30 @@ MODEL_TYPE = request.form["model_type"]
 ```
 3. Llama2 모델 추가
 
+
+
+### 5차 - Dockerfile 로 실행 하기
+1. 실행 방법
+```
+cd ./docker
+
+docker build -t llm-base:0.1 ./
+
+docker run -it --runtime=nvidia --gpus all \
+    --device=/dev/nvidia-uvm \
+    --device=/dev/nvidia-uvm-tools \
+    --device=/dev/nvidia-modeset \
+    --device=/dev/nvidiactl \
+    --device=/dev/nvidia0 \
+    --device=/dev/nvidia1 \
+    llm-base:0.1 /bin/bash
+
+apt update
+apt-get install vim
+
+vi init.sh
+(COPY)
+```
 
 
 ## 개발 중인 사항
