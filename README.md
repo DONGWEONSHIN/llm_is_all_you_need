@@ -180,6 +180,7 @@ MODEL_TYPE = request.form["model_type"]
 
 ### 5차 - Dockerfile 로 실행 하기
 1. 실행 방법
+1.1 host os에서
 ```
 cd ./docker
 
@@ -193,7 +194,9 @@ docker run -it --runtime=nvidia --gpus all \
     --device=/dev/nvidia0 \
     --device=/dev/nvidia1 \
     llm-base:0.1 /bin/bash
-
+```
+1.2 docker 안에서
+```
 apt update
 apt-get install vim
 
