@@ -26,5 +26,7 @@ CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python --no-c
 wget https://huggingface.co/LDCC/LDCC-SOLAR-10.7B-GGUF/resolve/main/ggml-model-f16.gguf
 wget https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF/resolve/main/llama-2-13b-chat.Q5_K_M.gguf
 
+# Google Auth
+
 # Execute
 # flask run -h 0.0.0.0 -p 5000
