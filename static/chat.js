@@ -186,7 +186,7 @@ $(document).ready(function() {                      // .ready document가 실행
       $.ajax({                                      
           data: {                                   
               msg: rawText,
-              filename:'contract_law.pdf',
+              filename:'Labor_law.pdf',
               model_type: 'GEMINI'	
           },
           type: "POST",

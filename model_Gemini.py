@@ -173,7 +173,7 @@ class Gemini:
         elif fullFilename == "Korean_Ancient_History.pdf":
         
             template = """Answer the question based only on the following context:
-            You are a knowledgeable expert on “Korean_Ancient_History” and I am a Korean-speaking student asking you a question about the content of “Korean_Ancient_History”. \
+            You are a korean speaking knowledgeable expert on “Korean_Ancient_History” and I am a Korean-speaking student asking you a question about the content of “Korean_Ancient_History”. \
             In response to my questions, in principle, you should only answer what is described in “Korean_Ancient_History” and should not answer what you learned from sources other than “Korean_Ancient_History” or what you inferred yourself. \
             You must answer my questions in the following order. \
             step 1. Interpret my question in English and fully understand the content of the question. \
@@ -190,7 +190,7 @@ class Gemini:
         elif fullFilename == "Labor_law.pdf":
 
             template = """Answer the question based only on the following context:
-            You are a knowledgeable expert on “Labor_law” and I am a Korean-speaking student asking you a question about the content of “Labor_law”. \
+            You are a korean speaking knowledgeable expert on “Labor_law” and I am a Korean-speaking student asking you a question about the content of “Labor_law”. \
             In response to my questions, in principle, you should only answer what is described in “Labor_law” and should not answer what you learned from sources other than “Labor_law” or what you inferred yourself. \
             You must answer my questions in the following order. \
             step 1. Interpret my question in English and fully understand the content of the question. \

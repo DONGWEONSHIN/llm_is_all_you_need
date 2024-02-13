@@ -27,7 +27,9 @@
 - 3차
 - 2024.1.17 ~ 2024.1.26
 - 4차
-- 2024.1.29 ~
+- 2024.1.29 ~ 2024.2.2
+- 5차
+- 2024.2.5 ~
 
 
 
@@ -75,6 +77,9 @@ https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF
 
 ## 폴더 구조
 ```
+├── docker
+│   ├── Dockerfile
+│   └── init.sh
 ├── IMG
 ├── PDF_DN_FOLDER
 ├── __pycache__
@@ -86,18 +91,24 @@ https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF
 │   ├── diffusion.html
 │   ├── index.html
 │   └── museum.html
+├── test_pdf
+│   ├── Korean_Ancient_History.pdf
+│   └── Labor_law.pdf
 ├── .env
 ├── .gitignore
 ├── app_Gemini.py
 ├── app_Llama2.py
 ├── app_PaLM2.py
+├── app.py
+├── ggml-model-f16.gguf
+├── llama-2-13b-chat.Q5_K_M.gguf
 ├── model_Gemini.py
 ├── model_Llama2.py
 ├── model_Palm2.py
-├── app.py
+├── prompt_changes.txt
 ├── README.md
 ├── requirements.txt
-├── llama-2-13b-chat.Q5_K_M.gguf
+├── text_Similarity.py
 ├── ver1_app.py
 └── ver1_requirements.txt
 ```
@@ -174,6 +185,36 @@ MODEL_TYPE = request.form["model_type"]
 ```
 3. Llama2 모델 추가
 
+
+
+### 5차 - Dockerfile 로 실행 하기
+
+1. 실행 방법
+
+1.1 host os에서
+```
+cd ./docker
+
+docker build -t llm-base:0.1 ./
+
+docker run -it --runtime=nvidia --gpus all \
+    --device=/dev/nvidia-uvm \
+    --device=/dev/nvidia-uvm-tools \
+    --device=/dev/nvidia-modeset \
+    --device=/dev/nvidiactl \
+    --device=/dev/nvidia0 \
+    --device=/dev/nvidia1 \
+    llm-base:0.1 /bin/bash
+```
+1.2 docker 안에서
+```
+apt update
+apt-get install -y vim
+
+vi ~/init.sh
+(COPY)
+. ~/init.sh
+```
 
 
 ## 개발 중인 사항
