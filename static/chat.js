@@ -128,7 +128,7 @@ $(document).ready(function() {                      // .ready document가 실행
       $.ajax({                                      
           data: {                                   
               msg: rawText,
-              filename:'Pre_modern_Korean_history1.pdf',
+              filename:'Korean_Ancient_History.pdf',
               model_type: 'PALM2'
           },
           type: "POST",
@@ -158,7 +158,7 @@ $(document).ready(function() {                      // .ready document가 실행
           data: {                                   
               msg: rawText,
               filename:'stable_diffusion_prompt.pdf',
-              model_type: 'PAML2'	
+              model_type: 'PALM2'	
           },
           type: "POST",
           url: "/chatWithPdf",                             
