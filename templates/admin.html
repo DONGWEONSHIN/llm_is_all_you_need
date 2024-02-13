@@ -30,7 +30,6 @@
 									<form id="uploadForm" enctype="multipart/form-data">
 										<label for="fileupload">File Select</label>
 										<input type="file" id="fileupload" class="pdf_fileselect_btn"></input>
-										<!--<button onclick="upload()" class="pdf_upload_btn">Upload</button>-->
 										<button type="submit" class="pdf_upload_btn">Upload</button>
 										<p id="resultUploadPath"></p>
 									</form>
@@ -40,7 +39,7 @@
 						</div>
 						<div id="messageFormeight" class="card-body msg_card_body">
 						</div>
-						<div id="block-pdf" class="card-footer" style="display:none"> <!--style="display:block"-->
+						<div id="block-pdf" class="card-footer" style="display:block"> <!--style="display:block"-->
 							<form id="messageArea" class="input-group"> 
                                 <input type="text" id="text" name="msg" placeholder="한글을 입력 후 'Enter key'를 눌러주세요." autocomplete="off" class="form-control type_msg" required/>
 								<div class="input-group-append">
@@ -48,7 +47,7 @@
 								</div>
 							</form>
 						</div>
-						<div id="none-pdf" class="card-footer" style="display:block"> <!--style="display:none"-->
+						<div id="none-pdf" class="card-footer" style="display:none"> <!--style="display:none"-->
 							<form id="messageAreaPdf" class="input-group">
                                 <input type="text" id="text" name="msg" placeholder="PDF 파일을 업로드 후 한글을 입력해주세요." autocomplete="off" class="form-control type_msg" required/>
 								<div class="input-group-append">

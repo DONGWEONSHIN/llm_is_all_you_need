@@ -53,10 +53,9 @@ body,html{
 	color:grey !important;
 	height: 60px !important;
 	overflow-y: auto;
-}
-	.type_msg:focus{
-	 box-shadow:none !important;
-   outline:0px !important;
+}.type_msg:focus{
+	box-shadow:none !important;
+	outline:0px !important;
 }
 .attach_btn{
 	border-radius: 15px 0 0 15px !important;
@@ -230,12 +229,8 @@ body,html{
 	color: white !important;
 	cursor: pointer;
 	position: absolute;
-	/* margin-top: 5px;
-	margin-right: 5px;
-	margin-bottom: auto; */
-	/*margin:5px 5px 0 auto;*/
-	margin:0px 0px 0px 0px; /*위 오른쪽 아래 왼쪽*/
-	padding: .5em .75em;
+	margin: 0px 0px 0px 0px; /*위 오른쪽 아래 왼쪽*/
+	padding: .55em .75em;
 	font-size: 16px;
 }
 
@@ -249,7 +244,7 @@ body,html{
 .filebox label {
 	display: inline-block;
 	border-radius: 10px 0px 0px 10px !important; /* padding 모서리 둥글게 */
-	margin:0px 0 0 320px; /*좌우 움직일때*/
+	margin: 0px 0 0 130px; /*좌우 움직일때*/
 	padding: .6em .75em;
 	color: #fff;
 	font-size: 16px; /*inherit;*/
