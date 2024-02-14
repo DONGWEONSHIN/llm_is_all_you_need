@@ -81,6 +81,9 @@ https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF
 │   ├── Dockerfile
 │   └── init.sh
 ├── IMG
+├── LLM_DOC
+│   ├── 프로젝트 제안서.docx
+│   └── LLM is all you need 프로젝트 시간표.xlsx
 ├── PDF_DN_FOLDER
 ├── __pycache__
 ├── static
@@ -223,8 +226,8 @@ vi ~/init.sh
 
 ## 개발 중인 사항
 1. 화면에서 PDF 업로드 후 질의를 시작하기 위해 js에서 /chatPdf로 함수를 변경해서 호출 해야 함
-2. 화면 UI/UX를 변경할 예정임
-3. 평가 지표 작업 중
+2. 화면 UI/UX를 변경할 예정임 -(완료)
+3. 평가 지표 작업 중 - (완료)
 
 
 
