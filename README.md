@@ -212,6 +212,8 @@ docker run -it --runtime=nvidia --gpus all \
     --device=/dev/nvidia0 \
     --device=/dev/nvidia1 \
     llm-base:0.1 /bin/bash
+
+docker run -it --gpus all nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04 /bin/bash
 ```
 1.2 docker 안에서
 ```
