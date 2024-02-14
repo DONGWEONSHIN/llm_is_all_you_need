@@ -22,7 +22,7 @@ langchain-google-vertexai==0.0.1
 ctransformers==0.2.27        # GPU - # ctransformers[cuda]
 langchain-experimental==0.0.49
 langchain-community==0.0.16
-llama-cpp-python==0.2.36     # GPU - # CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python --no-cache-dir --verbose
+llama-cpp-python==0.2.36     # GPU - # CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python==0.2.36 --no-cache-dir --verbose
 chardet==5.2.0
 
 # HuggingFace
