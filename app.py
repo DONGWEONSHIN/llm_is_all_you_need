@@ -5,7 +5,7 @@
 # langchain : 0.1.0
 # langchain-google-genai : 0.0.6
 # FileName : app.py
-# Base LLM : Vertex AI Palm2 / Google AI Gemini / Llama2
+# Base LLM : Vertex AI Palm2 / Google AI Gemini / Llama2 / Ko-Llama2
 # Created: Jan. 29. 2024
 # Author: D.W. SHIN
 
@@ -96,6 +96,13 @@ def chat():
 
         result = l_llm.chat(msg=query)
 
+    elif MODEL_TYPE == "KOLLAMA2":
+        MODEL_PATH = "ggml-model-f16.gguf"
+
+        k_llm = Llama2(model_path=MODEL_PATH)
+
+        result = k_llm.chat(msg=query)
+
     return result
 
 
@@ -167,6 +174,17 @@ def chatWithPdf():
         l_llm = Llama2(model_path=MODEL_PATH)
 
         result = l_llm.chatWithPdf(
+            msg=MSG,
+            fullFilename=FULLFILENAME,
+            pdf_dn_folder=PDF_DN_FOLDER,
+        )
+
+    elif MODEL_TYPE == "KOLLAMA2":
+        MODEL_PATH = "ggml-model-f16.gguf"
+
+        k_llm = Llama2(model_path=MODEL_PATH)
+
+        result = k_llm.chatWithPdf(
             msg=MSG,
             fullFilename=FULLFILENAME,
             pdf_dn_folder=PDF_DN_FOLDER,
