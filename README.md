@@ -89,11 +89,15 @@ https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF
 ├── templates
 │   ├── admin.html
 │   ├── diffusion.html
+│   ├── gemini.html
 │   ├── index.html
+│   ├── law.html
+│   ├── llama.html
 │   └── museum.html
 ├── test_pdf
 │   ├── Korean_Ancient_History.pdf
-│   └── Labor_law.pdf
+│   ├── Labor_law.pdf
+│   └── stable_diffusion_prompt.pdf
 ├── .env
 ├── .gitignore
 ├── app_Gemini.py

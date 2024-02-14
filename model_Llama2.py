@@ -161,9 +161,9 @@ class Llama2:
             Answer:
             """
 
-        # 프롬프트 수정(20240205)    
+        # 프롬프트 수정(20240205)
         elif fullFilename == "Korean_Ancient_History.pdf":
-        
+
             template = """Answer the question based only on the following context:
             You are a korean speaking knowledgeable expert on “Korean_Ancient_History” and I am a Korean-speaking student asking you a question about the content of “Korean_Ancient_History”. \
             In response to my questions, in principle, you should only answer what is described in “Korean_Ancient_History” and should not answer what you learned from sources other than “Korean_Ancient_History” or what you inferred yourself. \
@@ -177,10 +177,10 @@ class Llama2:
             {context}
 
             Question:  {question}
-            """   
+            """
 
         # 프롬프트 수정(20240205)
-        elif fullFilename == "Labor_law.pdf":   
+        elif fullFilename == "Labor_law.pdf":
 
             template = """Answer the question based only on the following context:
             You are a korean speaking knowledgeable expert on “Labor_law” and I am a Korean-speaking student asking you a question about the content of “Labor_law”. \
@@ -195,8 +195,8 @@ class Llama2:
             {context}
 
             Question:  {question}
-            """   
-            
+            """
+
         else:
             template = """Answer the question based only on the following context:
             {context}
