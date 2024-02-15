@@ -217,7 +217,7 @@ docker run -it --gpus all nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04 /bin/bas
 ```
 1.2 docker 안에서
 ```
-apt update
+apt-get update
 apt-get install -y vim
 
 vi ~/init.sh
