@@ -198,10 +198,11 @@ MODEL_TYPE = request.form["model_type"]
 
 1. 실행 방법
 
-1.1 host os에서
+1.1 host os에서 (처음 도커 만들 때)
 ```
 cd ./docker
 
+# (수정 필요함)
 docker build -t llm-base:0.1 ./
 
 docker run -it --runtime=nvidia --gpus all \
@@ -212,8 +213,19 @@ docker run -it --runtime=nvidia --gpus all \
     --device=/dev/nvidia0 \
     --device=/dev/nvidia1 \
     llm-base:0.1 /bin/bash
+```
 
-docker run -it --gpus all nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04 /bin/bash
+1.1.1 host os에서 (Artifact Registry에서 pull 받은 후 실행 할때)
+
+```
+# GCP에서 T4 4장인 경우
+docker run -it -p 5000:5000 --name "llm-gpu-docker" --runtime=nvidia --gpus all \
+    --device=/dev/nvidiactl \
+    --device=/dev/nvidia0 \
+    --device=/dev/nvidia1 \
+    --device=/dev/nvidia2 \
+    --device=/dev/nvidia3 \
+    us-central1-docker.pkg.dev/proj-team-3/llm-is-all-you-need-container-dev-repo/llm-is-all-you-need:tag-gpu-04 /bin/bash
 ```
 1.2 docker 안에서
 ```

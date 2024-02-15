@@ -1,0 +1,35 @@
+#
+# Created: Feb. 08. 2024
+# Author: D.W. SHIN
+# 
+# Install python 3.10 & miniconda 3.10
+#
+# https://github.com/DONGWEONSHIN/llm_is_all_you_need
+#
+
+FROM nvidia/cuda:11.3.1-cudnn8-devel-ubuntu20.04
+
+# install python 3.10
+# 타임존 등 몇가지 부분 수정해야 함!!!
+RUN apt-get update
+RUN apt-get install -y software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update
+
+RUN apt list | grep python3.10
+RUN apt install -y python3.10
+
+# make simbolic link
+RUN ln -s /usr/bin/python3.10 /usr/bin/python
+
+# install wget git curl
+RUN apt-get install -y wget git curl
+
+# Install miniconda 3.10
+RUN mkdir -p ~/miniconda3
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py310_23.11.0-2-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+RUN bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+RUN rm -rf ~/miniconda3/miniconda.sh
+RUN ~/miniconda3/bin/conda init bash
+
+
