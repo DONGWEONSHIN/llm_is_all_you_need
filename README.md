@@ -21,7 +21,6 @@
 - DONGWEONSHIN
 - Jeon0866 JinHwan
 - wjseoduq
-- rnansfyd
 
 
 
