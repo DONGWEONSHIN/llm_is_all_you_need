@@ -107,6 +107,7 @@ https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF
 │   └── init.sh
 ├── IMG
 ├── LLM_DOC
+│   ├── 24.02.16 발표자료.pdf
 │   ├── 프로젝트 제안서.docx
 │   └── LLM is all you need 프로젝트 시간표.xlsx
 ├── PDF_DN_FOLDER
