@@ -22,8 +22,8 @@ RUN apt install -y python3.10
 # make simbolic link
 RUN ln -s /usr/bin/python3.10 /usr/bin/python
 
-# install wget git curl
-RUN apt-get install -y wget git curl
+# install wget git curl vim
+RUN apt-get install -y wget git curl vim
 
 # Install miniconda 3.10
 RUN mkdir -p ~/miniconda3
