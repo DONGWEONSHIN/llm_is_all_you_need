@@ -24,7 +24,9 @@
 - rnansfyd
 
 
+
 ## 4. 프로젝트 기간
+<img style="margin-top: 20px" src='./IMG/schedule(3).png'> </img>
 - 1차
 - 2023.12.29 ~ 2024.1.5
 - 2차
@@ -35,7 +37,6 @@
 - 2024.1.29 ~ 2024.2.2
 - 5차
 - 2024.2.5 ~ 2024.2.16
-<img style="margin-top: 20px" src='./IMG/schedule(3).png'> </img>
 
 
 
@@ -143,9 +144,6 @@ https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF
 ├── ver1_app.py
 └── ver1_requirements.txt
 ```
-<img style="margin-top: 20px" src='./IMG/system_architecture(4).png'> </img>
-<img style="margin-top: 20px" src='./IMG/rag(5).png'> </img>
-<img style="margin-top: 20px" src='./IMG/rag_(6).png'> </img>
 
 
 ## 7. app.py 주요 호출 함수
@@ -300,9 +298,25 @@ vi ~/init.sh
 3. 평가 지표 작업 중 - (완료)
 
 
-## 결론
+
+## 시스템 아키텍처
+<img style="margin-top: 20px" src='./IMG/system_architecture(4).png'> </img>
+
+
+
+## RAG
+<img style="margin-top: 20px" src='./IMG/rag(5).png'> </img>
+<img style="margin-top: 20px" src='./IMG/rag_(6).png'> </img>
+
+
+
+## 프롬프트 튜닝 및 테스트
 <img style="margin-top: 20px" src='./IMG/prompt_tuning_test_1(7).png'> </img>
 <img style="margin-top: 20px" src='./IMG/prompt_tuning_test_2(8).png'> </img>
+
+
+
+## 결론
 <img style="margin-top: 20px" src='./IMG/conclusion(9).png'> </img>
 
 
