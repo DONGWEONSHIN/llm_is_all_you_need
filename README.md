@@ -220,9 +220,6 @@ MODEL_TYPE = request.form["model_type"]
 1. Debian bullseye 버전의 Docker 이미지에서 python 3.10을 설치 한 후 CUDA 11.8을 설치를 시도 하였으나, 의존성 문제가 있어서 설치가 안됨
 
 2. 기 설치된 cuda 11.3과 cunnd8의 nvidia/cuda Docker 이미지를 사용하여 필수 프로그램 설치 및 환경 설정 추가 - (init.sh 참고)
-```
-
-```
 
 3. 만들어진 Docker image를 Snapshot을 만들어 GCP의 Artifact Registry에 저장
 
