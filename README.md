@@ -1,6 +1,9 @@
 ![Gemini](IMG/main.gif)
 # LLM is All You Need
 
+<img style="margin-top: 20px" src='./IMG/llm_is_all_you_need(1).png'> </img>
+
+
 ## 1. 목적
 - Gemini를 이용하여 PDF를 업로드 후, RAG 구현하여 PDF에 있는 내용을 질의 (1차, 2차)
 - Palm2를 이용하여 RAG 구성 (3차)
@@ -32,6 +35,7 @@
 - 2024.1.29 ~ 2024.2.2
 - 5차
 - 2024.2.5 ~ 2024.2.16
+<img style="margin-top: 20px" src='./IMG/schedule(3).png'> </img>
 
 
 
@@ -139,7 +143,9 @@ https://huggingface.co/TheBloke/Llama-2-13B-chat-GGUF
 ├── ver1_app.py
 └── ver1_requirements.txt
 ```
-
+<img style="margin-top: 20px" src='./IMG/system_architecture(4).png'> </img>
+<img style="margin-top: 20px" src='./IMG/rag(5).png'> </img>
+<img style="margin-top: 20px" src='./IMG/rag_(6).png'> </img>
 
 
 ## 7. app.py 주요 호출 함수
@@ -294,6 +300,10 @@ vi ~/init.sh
 3. 평가 지표 작업 중 - (완료)
 
 
+## 결론
+<img style="margin-top: 20px" src='./IMG/prompt_tuning_test_1(7).png'> </img>
+<img style="margin-top: 20px" src='./IMG/prompt_tuning_test_2(8).png'> </img>
+<img style="margin-top: 20px" src='./IMG/conclusion(9).png'> </img>
 
 
 
